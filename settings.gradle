@@ -1,2 +1,3 @@
 rootProject.name = "KLineChart"
 include ':app'
+include ':kline'
