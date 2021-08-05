@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#131D32</color>
-    <color name="colorPrimaryDark">#131D32</color>
-    <color name="colorAccent">#131D32</color>
+    <color name="colorPrimary">#151C30</color>
+    <color name="colorPrimaryDark">#151C30</color>
+    <color name="colorAccent">#151C30</color>
 
+    <color name="transparent">#00000000</color>
+
+    <color name="chart_dark">#131C2F</color>
+    <color name="blue_btn">#182A43</color>
+
+    <color name="blue_dark">#0D1723</color>
     <color name="chart_red">#D04861</color>
     <color name="chart_green">#01AF8B</color>
     <color name="chart_line">#1e82d2</color>
@@ -14,7 +20,6 @@
     <color name="chart_ma30">#DA8AE5</color>
     <color name="chart_white">#ffffff</color>
 
-    <color name="chart_background">#202326</color>
     <color name="chart_bac">#00FFFFFF</color>
     <color name="chart_point_bac">#202326</color>
     <color name="chart_grid_line">#1AFFFFFF</color>
