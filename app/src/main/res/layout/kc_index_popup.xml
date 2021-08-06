@@ -1,100 +1,113 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@color/chart_dark"
-    android:orientation="vertical"
-    android:padding="8dp">
+    android:layout_height="match_parent">
 
-
-    <TextView
-        android:id="@+id/text1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="主图"
-        android:textColor="@color/white"
-        android:textSize="14sp" />
+    <View
+        android:id="@+id/index_background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0"
+        android:background="#000000" />
 
     <LinearLayout
+        android:id="@+id/index_top"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingTop="8dp">
-
-        <TextView
-            android:id="@+id/maText"
-            android:layout_width="88dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/btn_circle_deep"
-            android:gravity="center"
-            android:padding="6dp"
-            android:text="MA"
-            android:textColor="@color/chart_text"
-            android:textSize="12sp" />
+        android:layout_height="148dp"
+        android:background="@color/chart_dark"
+        android:orientation="vertical"
+        android:padding="8dp">
 
 
         <TextView
-            android:id="@+id/bollText"
-            android:layout_width="88dp"
+            android:id="@+id/text1"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            android:background="@drawable/btn_circle_deep"
             android:gravity="center"
-            android:padding="6dp"
-            android:text="BOLL"
-            android:textColor="@color/chart_text"
-            android:textSize="12sp" />
+            android:text="主图"
+            android:textColor="@color/white"
+            android:textSize="14sp" />
 
-    </LinearLayout>
-
-
-    <TextView
-        android:id="@+id/text2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:paddingTop="16dp"
-        android:text="副图"
-        android:textColor="@color/white"
-        android:textSize="14sp" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingTop="8dp">
-
-        <RadioGroup
-            android:id="@+id/k_Group"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:paddingBottom="8dp">
+            android:paddingTop="8dp">
 
-            <RadioButton
-                android:id="@+id/macdText"
-                style="@style/StockTabStyle"
-                android:text="MACD" />
+            <TextView
+                android:id="@+id/maText"
+                android:layout_width="88dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/btn_circle_deep"
+                android:gravity="center"
+                android:padding="6dp"
+                android:text="MA"
+                android:textColor="@color/chart_text"
+                android:textSize="12sp" />
 
-            <RadioButton
-                android:id="@+id/kdjText"
-                style="@style/StockTabStyle"
+
+            <TextView
+                android:id="@+id/bollText"
+                android:layout_width="88dp"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
-                android:text="KDJ" />
+                android:background="@drawable/btn_circle_deep"
+                android:gravity="center"
+                android:padding="6dp"
+                android:text="BOLL"
+                android:textColor="@color/chart_text"
+                android:textSize="12sp" />
 
-            <RadioButton
-                android:id="@+id/rsiText"
-                style="@style/StockTabStyle"
-                android:layout_marginLeft="8dp"
-                android:text="RSI" />
+        </LinearLayout>
 
-            <RadioButton
-                android:id="@+id/wrText"
-                style="@style/StockTabStyle"
-                android:layout_marginLeft="8dp"
-                android:text="WR" />
 
-        </RadioGroup>
+        <TextView
+            android:id="@+id/text2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingTop="16dp"
+            android:text="副图"
+            android:textColor="@color/white"
+            android:textSize="14sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="8dp">
+
+            <RadioGroup
+                android:id="@+id/k_Group"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingBottom="8dp">
+
+                <RadioButton
+                    android:id="@+id/macdText"
+                    style="@style/StockTabStyle"
+                    android:text="MACD" />
+
+                <RadioButton
+                    android:id="@+id/kdjText"
+                    style="@style/StockTabStyle"
+                    android:layout_marginLeft="8dp"
+                    android:text="KDJ" />
+
+                <RadioButton
+                    android:id="@+id/rsiText"
+                    style="@style/StockTabStyle"
+                    android:layout_marginLeft="8dp"
+                    android:text="RSI" />
+
+                <RadioButton
+                    android:id="@+id/wrText"
+                    style="@style/StockTabStyle"
+                    android:layout_marginLeft="8dp"
+                    android:text="WR" />
+
+            </RadioGroup>
+        </LinearLayout>
     </LinearLayout>
-</LinearLayout>
+</FrameLayout>

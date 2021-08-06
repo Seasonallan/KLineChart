@@ -182,7 +182,7 @@ public abstract class BaseKLineChartView extends ScrollAndScaleView {
             }
         });
 
-        mSelectorFramePaint.setStrokeWidth(ViewUtil.Dp2Px(getContext(), 0.6f));
+        mSelectorFramePaint.setStrokeWidth(ViewUtil.Dp2Px(getContext(), 0.3f));
         mSelectorFramePaint.setStyle(Paint.Style.STROKE);
         mSelectorFramePaint.setColor(Color.WHITE);
     }
@@ -429,15 +429,15 @@ public abstract class BaseKLineChartView extends ScrollAndScaleView {
         if (isLongPress) {
             // 画Y值
             IKLine point = (IKLine) getItem(mSelectedIndex);
-            float w1 = ViewUtil.Dp2Px(getContext(), 5);
-            float w2 = ViewUtil.Dp2Px(getContext(), 3);
+            float w1 = ViewUtil.Dp2Px(getContext(), 6);
+            float w2 = ViewUtil.Dp2Px(getContext(), 6);
             float r = textHeight / 2 + w2;
             y = getMainY(point.getClosePrice());
             float x;
             String text = formatValue(point.getClosePrice());
             float textWidth = mTextPaint.measureText(text);
             if (translateXtoX(getX(mSelectedIndex)) < getChartWidth() / 2) {
-                x = 1;
+                x = -1;
                 Path path = new Path();
                 path.moveTo(x, y - r);
                 path.lineTo(x, y + r);
@@ -453,8 +453,8 @@ public abstract class BaseKLineChartView extends ScrollAndScaleView {
                 Path path = new Path();
                 path.moveTo(x, y);
                 path.lineTo(x + w2, y + r);
-                path.lineTo(mWidth - 2, y + r);
-                path.lineTo(mWidth - 2, y - r);
+                path.lineTo(mWidth + 1, y + r);
+                path.lineTo(mWidth + 1, y - r);
                 path.lineTo(x + w2, y - r);
                 path.close();
                 canvas.drawPath(path, mSelectPointPaint);
