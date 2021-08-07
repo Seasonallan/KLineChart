@@ -71,7 +71,7 @@ public class TimePanel {
                 textView.setBackgroundResource(R.drawable.btn_circle_deep);
             }
         }
-        if ("0".equals(interval)) {
+        if ("-1".equals(interval)) {
             kLineChartView.setMainDrawLine(true);
         } else {
             kLineChartView.setMainDrawLine(false);

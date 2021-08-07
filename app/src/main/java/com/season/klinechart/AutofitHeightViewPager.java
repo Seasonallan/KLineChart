@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -51,9 +52,9 @@ public class AutofitHeightViewPager extends ViewPager {
     public void resetHeight(int position) {
         this.position = position;
         if (maps.size() > position) {
-            LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) getLayoutParams();
+            RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) getLayoutParams();
             if (layoutParams == null) {
-                layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, maps.get(position));
+                layoutParams = new RelativeLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, maps.get(position));
             } else {
                 layoutParams.height = maps.get(position);
             }

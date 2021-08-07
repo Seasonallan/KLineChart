@@ -69,10 +69,10 @@ public class WebSocketService {
                 timeInterval = 7 * 24 * 60 * 60 * 1000;
                 break;
             case "1M":
-                timeInterval = 31 * 24 * 60 * 60 * 1000;
+                timeInterval = 8 * 24 * 60 * 60 * 1000;
                 break;
             case "-1":
-                timeInterval = 60 * 1000;
+                timeInterval = 1 * 1000;
                 break;
             default:
                 timeInterval = Integer.parseInt(interval) * 60 * 1000;

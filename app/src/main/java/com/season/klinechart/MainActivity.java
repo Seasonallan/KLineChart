@@ -5,6 +5,9 @@ import android.util.Log;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 
 import com.github.fujianlian.klinechart.DataHelper;
 import com.github.fujianlian.klinechart.KLineChartAdapter;
@@ -12,6 +15,8 @@ import com.github.fujianlian.klinechart.KLineChartView;
 import com.github.fujianlian.klinechart.KLineEntity;
 import com.github.fujianlian.klinechart.formatter.DateFormatter;
 import com.google.android.material.tabs.TabLayout;
+import com.season.klinechart.fragment.BriefFragment;
+import com.season.klinechart.fragment.DealFragment;
 import com.season.klinechart.net.BeanPrice;
 import com.season.klinechart.net.WebSocketService;
 import com.season.klinechart.panel.TimePanel;
@@ -42,7 +47,62 @@ public class MainActivity extends AppCompatActivity implements WebSocketService.
         kLineChartView.setGridRows(5);
         kLineChartView.setGridColumns(5);
         kLineChartView.setAdapter(adapter);
-        initView();
+
+
+        tv_coin_title = findViewById(R.id.toolbarTitle);
+        tab_layout = findViewById(R.id.tab_layout);
+        tab_View = findViewById(R.id.tab_View);
+
+        timePanel = new TimePanel(this, kLineChartView).act();
+        topPanel = new TopPanel(this, kLineChartView).act();
+
+        findViewById(R.id.btn_back).setOnClickListener(o -> {
+            finish();
+        });
+
+        //将fragment装进列表中
+        List<Fragment> list_fragment = new ArrayList<>();
+        list_fragment.add(DealFragment.getInstance());
+        list_fragment.add(BriefFragment.getInstance());
+        //将名称加载tab名字列表，正常情况下，我们应该在values/arrays.xml中进行定义然后调用
+        ArrayList<String> list_title = new ArrayList<>();
+        list_title.add("交易");
+        list_title.add("详情");
+
+        //为TabLayout添加tab名称
+        tab_layout.setTabMode(TabLayout.MODE_FIXED);
+
+        //为TabLayout添加tab名称
+        tab_layout.addTab(tab_layout.newTab().setText(list_title.get(0)));
+        tab_layout.addTab(tab_layout.newTab().setText(list_title.get(1)));
+        FragmentPagerAdapter mAdapter = new FragmentPagerAdapter(getSupportFragmentManager()) {
+            @Override
+            public Fragment getItem(int position) {
+                return list_fragment.get(position);
+            }
+
+            @Override
+            public int getCount() {
+                return list_title.size();
+            }
+
+            @Override
+            public CharSequence getPageTitle(int position) {
+                return list_title.get(position % list_title.size());
+            }
+        };
+
+        tab_View.setOffscreenPageLimit(3);
+        //viewpager加载adapter
+        tab_View.setAdapter(mAdapter);
+        //TabLayout加载viewpager
+        tab_layout.setupWithViewPager(tab_View);
+        tab_View.post(new Runnable() {
+            @Override
+            public void run() {
+
+            }
+        });
 
         kLineChartView.justShowLoading();
         if (false){
@@ -69,19 +129,6 @@ public class MainActivity extends AppCompatActivity implements WebSocketService.
     private TimePanel timePanel;
     private TopPanel topPanel;
 
-    private void initView() {
-        tv_coin_title = findViewById(R.id.toolbarTitle);
-        tab_layout = findViewById(R.id.tab_layout);
-        tab_View = findViewById(R.id.tab_View);
-
-        timePanel = new TimePanel(this, kLineChartView).act();
-        topPanel = new TopPanel(this, kLineChartView).act();
-
-        findViewById(R.id.btn_back).setOnClickListener(o -> {
-            finish();
-        });
-
-    }
 
     @Override
     protected void onDestroy() {
@@ -118,14 +165,11 @@ public class MainActivity extends AppCompatActivity implements WebSocketService.
             currentList.add(data);
         }
         DataHelper.calculate(currentList);
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                adapter.addFooterData(currentList);
-                adapter.notifyDataSetChanged();
-                kLineChartView.refreshEnd();
-                kLineChartView.setScrollEnable(true);
-            }
+        runOnUiThread(() -> {
+            adapter.addFooterData(currentList);
+            adapter.notifyDataSetChanged();
+            kLineChartView.refreshEnd();
+            kLineChartView.setScrollEnable(true);
         });
     }
 
@@ -141,7 +185,7 @@ public class MainActivity extends AppCompatActivity implements WebSocketService.
             });
         }else{
             //订阅交易记录
-            //WebSocketService.getInstance().subscribeTrade();
+            WebSocketService.getInstance().subscribeTrade();
         }
     }
 }
