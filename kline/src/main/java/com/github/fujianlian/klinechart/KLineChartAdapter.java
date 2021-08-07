@@ -9,7 +9,7 @@ import java.util.List;
  */
 public class KLineChartAdapter extends BaseKLineChartAdapter {
 
-    private List<KLineEntity> datas = new ArrayList<>();
+    public List<KLineEntity> datas = new ArrayList<>();
 
     public KLineChartAdapter() {
 

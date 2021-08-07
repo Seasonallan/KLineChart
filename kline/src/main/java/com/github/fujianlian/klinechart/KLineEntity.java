@@ -127,6 +127,8 @@ public class KLineEntity implements IKLine {
         return MA10Volume;
     }
 
+    public long Time;
+    public String Id;
     public String Date;
     public float Open;
     public float High;

@@ -13,11 +13,13 @@ import android.widget.TextView;
 import com.github.fujianlian.klinechart.KLineChartView;
 import com.github.fujianlian.klinechart.draw.Status;
 import com.season.klinechart.R;
+import com.season.klinechart.net.WebSocketService;
+
 
 public class TimePanel {
 
     final int[] textIdsPop = {R.id.tv_text_fen0, R.id.tv_text_fen1, R.id.tv_text_fen5, R.id.tv_text_fen30, R.id.tv_text_mouth};
-    final String[] intervalsPop = {"0", "1", "5", "30", "1M"};
+    final String[] intervalsPop = {"-1", "1", "5", "30", "1M"};
 
     final int[] textIds = {R.id.tv_text_fen15, R.id.tv_text_hour1, R.id.tv_text_hour4, R.id.tv_text_day, R.id.tv_text_week};
     final String[] intervals = {"15", "60", "240", "1D", "1W"};
@@ -31,17 +33,17 @@ public class TimePanel {
     }
 
 
-    private String currentTimeSwitch = "-1";//当前显示的分时类型   默认1分钟
+    public String currentTimeSwitch = "-10086";//当前显示的分时类型   默认1分钟
     private boolean isReceivedSub = false;//是否继续接收Sub数据
 
-    private void timeSwitch(String interval, TextView selectTextView) {
+    public void timeSwitch(String interval) {
         if (currentTimeSwitch == interval) {
             return;
         }
         isReceivedSub = false;
         currentTimeSwitch = interval;
-        if (!currentTimeSwitch.equals("0")) {
-            //CmdUtil.cmdReq(mCoinCode, currentTimeSwitch);//查询历史
+        if (true || !currentTimeSwitch.equals("0")) {
+            WebSocketService.getInstance().req(interval);
         }
 
         kLineChartView.hideSelectData();
@@ -101,7 +103,7 @@ public class TimePanel {
                 });
                 animator.setDuration(200);
                 animator.start();
-                timeSwitch(intervalsPop[finalI], textView);
+                timeSwitch(intervalsPop[finalI]);
             });
         }
     }
@@ -313,7 +315,7 @@ public class TimePanel {
     private TextView k_index;
     private int itemWidth;
 
-    public void act() {
+    public TimePanel act() {
         time_all = findViewById(R.id.time_all);
         k_index = findViewById(R.id.k_index);
         k_line = findViewById(R.id.k_line);
@@ -325,6 +327,7 @@ public class TimePanel {
             int finalI = i;
             textView.setOnClickListener(v -> {
                 switchTimePop(false);
+                switchIndexPop(false);
                 ValueAnimator animator = ValueAnimator.ofInt(((LinearLayout.LayoutParams) k_line.getLayoutParams()).leftMargin, finalI * itemWidth + itemWidth / 4);
                 animator.addUpdateListener(animator1 -> {
                     LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) k_line.getLayoutParams();
@@ -334,7 +337,7 @@ public class TimePanel {
                 });
                 animator.setDuration(200);
                 animator.start();
-                timeSwitch(intervals[finalI], textView);
+                timeSwitch(intervals[finalI]);
             });
         }
         k_line.post(() -> {
@@ -353,5 +356,6 @@ public class TimePanel {
             if (switchTimePop(false))
                 switchIndexPop(indexView.getVisibility() == View.VISIBLE ? false : true);
         });
+        return this;
     }
 }
