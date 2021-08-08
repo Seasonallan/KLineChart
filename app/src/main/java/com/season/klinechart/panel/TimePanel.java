@@ -42,9 +42,7 @@ public class TimePanel {
         }
         isReceivedSub = false;
         currentTimeSwitch = interval;
-        if (true || !currentTimeSwitch.equals("0")) {
-            WebSocketService.getInstance().req(interval);
-        }
+        WebSocketService.getInstance().req(interval);
 
         kLineChartView.hideSelectData();
 

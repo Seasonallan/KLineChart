@@ -1,35 +1,32 @@
 package com.season.klinechart.fragment;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.season.klinechart.R;
+import com.season.klinechart.util.CoinCodeDecimalUtil;
 
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
-/**
- * 成交
- */
-public class DealFragment extends Fragment {
-    private static final String TAG = "DealFragment";
-    TextView text_time;
-    TextView text_fangxiang;
-    TextView text_jiage;
-    TextView text_shuliang;
-    RecyclerView recycler_view;
-    LinearLayout empty_view;
 
-    private List<DealRecordAdapterBean> items = new ArrayList<>();
+public class DealFragment extends Fragment {
+    RecyclerView recycler_view;
+
+    private List<DealRecord> items = new ArrayList<>();
     private DealRecordAdapter myAdapter;
 
     public static DealFragment getInstance() {
@@ -45,23 +42,101 @@ public class DealFragment extends Fragment {
         View parent = inflater.inflate(R.layout.kc_fragment_deal, null);
 
         recycler_view = parent.findViewById(R.id.recycler_view);
-        empty_view = parent.findViewById(R.id.empty_view);
 
-        recycler_view.setNestedScrollingEnabled(false);
-        recycler_view.setFocusable(false);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recycler_view.setLayoutManager(linearLayoutManager);
-        myAdapter = new DealRecordAdapter(items);
-        linearLayoutManager.setStackFromEnd(true);
-        linearLayoutManager.setReverseLayout(true);
+
+        for (int i = 0; i < 20; i++) {
+            items.add(new DealRecord());
+        }
+        myAdapter = new DealRecordAdapter(getContext(), items);
         recycler_view.setAdapter(myAdapter);
 
         return parent;
     }
 
+    public String coinCode = "";
 
     @Override
     public void onDestroy() {
         super.onDestroy();
     }
+
+    public void onRecordChange(List<DealRecord> list) {
+        for (int i = 0; i < list.size(); i++) {
+            items.add(0, list.get(i));
+            items.remove(items.size() - 1);
+        }
+        myAdapter.notifyDataSetChanged();
+    }
+
+
+    public class DealRecordAdapter extends RecyclerView.Adapter<DealRecordAdapter.DealHolder> {
+
+        List<DealRecord> list;
+        Context context;
+        private DecimalFormat dfCoinNumber;//币种数量小数位限制
+        private DecimalFormat dfCoinPrice;//币种价格小数位限制
+
+        DealRecordAdapter(Context context, List<DealRecord> list) {
+            this.list = list;
+            this.context = context;
+            this.dfCoinPrice = new DecimalFormat(CoinCodeDecimalUtil.getDecimalFormatPrice(coinCode));//币种价格小数位限制
+            this.dfCoinNumber = new DecimalFormat(CoinCodeDecimalUtil.getDecimalFormatNumber(coinCode));//币种数量小数位限制
+        }
+
+        @Override
+        public int getItemViewType(int position) {
+            return position == 0 ? 0 : 1;
+        }
+
+        @Override
+        public DealHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            View view = LayoutInflater.from(context).inflate(viewType == 0 ? R.layout.kc_item_deal_record0 :
+                    R.layout.kc_item_deal_record, parent, false);
+            DealHolder holder = new DealHolder(view);
+            return holder;
+        }
+
+        @Override
+        public void onBindViewHolder(DealRecordAdapter.DealHolder holder, int position) {
+            if (position == 0) {
+                return;
+            }
+            DealRecord item = list.get(position - 1);
+            if (item.getId() == -1) {
+                holder.timeView.setText("");
+                holder.directionView.setText("");
+                holder.priceView.setText("");
+                holder.numView.setText("");
+            } else {
+                holder.timeView.setText(new SimpleDateFormat("HH:mm:ss").format(new Date(item.getTime() * 1000L)));
+                holder.directionView.setText(item.getDirection() == 1 ? "买入" : "卖出");
+                holder.directionView.setTextColor(context.getResources().getColor(item.getDirection() == 1 ? R.color.chart_green : R.color.chart_red));
+                holder.priceView.setText(dfCoinPrice.format(Double.parseDouble(item.getPrice())));
+                holder.numView.setText(dfCoinNumber.format(item.getAmount()));
+            }
+        }
+
+        @Override
+        public int getItemCount() {
+            return list.size() + 1;
+        }
+
+
+        class DealHolder extends RecyclerView.ViewHolder {
+            public TextView timeView, directionView, priceView, numView;
+
+            public DealHolder(@NonNull View itemView) {
+                super(itemView);
+                timeView = itemView.findViewById(R.id.time_list);
+                directionView = itemView.findViewById(R.id.direction_list);
+                priceView = itemView.findViewById(R.id.price_list);
+                numView = itemView.findViewById(R.id.num_list);
+            }
+
+        }
+
+    }
+
 }

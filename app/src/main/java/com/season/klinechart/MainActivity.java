@@ -1,7 +1,6 @@
 package com.season.klinechart;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,6 +16,7 @@ import com.github.fujianlian.klinechart.formatter.DateFormatter;
 import com.google.android.material.tabs.TabLayout;
 import com.season.klinechart.fragment.BriefFragment;
 import com.season.klinechart.fragment.DealFragment;
+import com.season.klinechart.fragment.DealRecord;
 import com.season.klinechart.net.BeanPrice;
 import com.season.klinechart.net.WebSocketService;
 import com.season.klinechart.panel.TimePanel;
@@ -31,13 +31,15 @@ public class MainActivity extends AppCompatActivity implements WebSocketService.
     KLineChartView kLineChartView;
     KLineChartAdapter adapter;
 
+    DealFragment dealFragment;
+    String coinCode = "BTC_USDT";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chart);
 
         WebSocketService.getInstance().register(this);
-        WebSocketService.getInstance().connect(Configure.socketUrl, "BTC_USDT");
+        WebSocketService.getInstance().connect(Configure.socketUrl, coinCode);
         //WebSocketService.getInstance().connect("ws://api-new-test.sgpexchange.com/deep", "BTC_USDT");
 
         kLineChartView = findViewById(R.id.kLineChartView);
@@ -60,14 +62,16 @@ public class MainActivity extends AppCompatActivity implements WebSocketService.
             finish();
         });
 
+        dealFragment = DealFragment.getInstance();
+        dealFragment.coinCode = coinCode;
         //将fragment装进列表中
         List<Fragment> list_fragment = new ArrayList<>();
-        list_fragment.add(DealFragment.getInstance());
+        list_fragment.add(dealFragment);
         list_fragment.add(BriefFragment.getInstance());
         //将名称加载tab名字列表，正常情况下，我们应该在values/arrays.xml中进行定义然后调用
         ArrayList<String> list_title = new ArrayList<>();
-        list_title.add("交易");
-        list_title.add("详情");
+        list_title.add("成交");
+        list_title.add("简介");
 
         //为TabLayout添加tab名称
         tab_layout.setTabMode(TabLayout.MODE_FIXED);
@@ -93,9 +97,7 @@ public class MainActivity extends AppCompatActivity implements WebSocketService.
         };
 
         tab_View.setOffscreenPageLimit(3);
-        //viewpager加载adapter
         tab_View.setAdapter(mAdapter);
-        //TabLayout加载viewpager
         tab_layout.setupWithViewPager(tab_View);
         tab_View.post(new Runnable() {
             @Override
@@ -105,7 +107,7 @@ public class MainActivity extends AppCompatActivity implements WebSocketService.
         });
 
         kLineChartView.justShowLoading();
-        if (false){
+        if (false) {
             new Thread(() -> {
                 List<KLineEntity> data = DataRequest.getALL(MainActivity.this);
                 DataHelper.calculate(data);
@@ -124,7 +126,7 @@ public class MainActivity extends AppCompatActivity implements WebSocketService.
     private TextView tv_coin_title;
 
     private TabLayout tab_layout;
-    private AutofitHeightViewPager tab_View;
+    private ViewPager tab_View;
 
     private TimePanel timePanel;
     private TopPanel topPanel;
@@ -144,6 +146,7 @@ public class MainActivity extends AppCompatActivity implements WebSocketService.
 
 
     List<KLineEntity> currentList = new ArrayList<>();
+
     @Override
     public void onChartChange(List<KLineEntity> data) {
         DataHelper.calculate(data);
@@ -159,9 +162,9 @@ public class MainActivity extends AppCompatActivity implements WebSocketService.
 
     @Override
     public synchronized void onSubscribe(boolean update, KLineEntity data) {
-        if (update){
+        if (update) {
             currentList.set(currentList.size() - 1, data);
-        }else{
+        } else {
             currentList.add(data);
         }
         DataHelper.calculate(currentList);
@@ -175,7 +178,7 @@ public class MainActivity extends AppCompatActivity implements WebSocketService.
 
     @Override
     public void onSocketConnected(int index) {
-        if (index == 0){
+        if (index == 0) {
             //订阅曲线
             runOnUiThread(new Runnable() {
                 @Override
@@ -183,9 +186,16 @@ public class MainActivity extends AppCompatActivity implements WebSocketService.
                     timePanel.timeSwitch("15");
                 }
             });
-        }else{
+        } else {
             //订阅交易记录
             WebSocketService.getInstance().subscribeTrade();
         }
+    }
+
+    @Override
+    public void onTradeChange(List<DealRecord> list) {
+        runOnUiThread(() -> {
+            dealFragment.onRecordChange(list);
+        });
     }
 }

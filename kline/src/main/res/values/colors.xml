@@ -4,6 +4,7 @@
     <color name="colorPrimaryDark">#151C30</color>
     <color name="colorAccent">#151C30</color>
 
+    <color name="white">#FFFFFFFF</color>
     <color name="transparent">#00000000</color>
 
     <color name="chart_dark">#131C2F</color>
@@ -18,7 +19,7 @@
     <color name="chart_ma5">#01AF8B</color>
     <color name="chart_ma10">#FFC76D</color>
     <color name="chart_ma30">#DA8AE5</color>
-    <color name="chart_white">#ffffff</color>
+    <color name="chart_white">#CAD1EB</color>
 
     <color name="chart_background">#0D1723</color> <!--背景色-->
     <color name="chart_point_bac">#202326</color> <!--选中时 矩形框背景色-->

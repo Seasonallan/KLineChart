@@ -2,6 +2,8 @@ package com.season.klinechart;
 
 import org.junit.Test;
 
+import java.text.DecimalFormat;
+
 import static org.junit.Assert.*;
 
 /**
@@ -13,5 +15,10 @@ public class ExampleUnitTest {
     @Test
     public void addition_isCorrect() {
         assertEquals(4, 2 + 2);
+
+        DecimalFormat dfRMB = new DecimalFormat("#,#0.00");
+
+        System.out.println(""+ dfRMB.format(2.002));
+
     }
 }

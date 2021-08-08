@@ -3,7 +3,7 @@ package com.season.klinechart.fragment;
 /**
  * 成交记录 RecyclerView适配器里面用的
  * */
-public class DealRecordAdapterBean {
+public class DealRecord {
 
     /**
      * id : 1806734
@@ -13,7 +13,7 @@ public class DealRecordAdapterBean {
      * type : sell
      */
 
-    private int id;
+    private int id = -1;
     private Integer time;
     private String price;
     private Double amount;

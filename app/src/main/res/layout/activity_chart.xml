@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
@@ -47,71 +48,83 @@
     </RelativeLayout>
 
 
-    <ScrollView
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fillViewport="true">
+        android:layout_height="match_parent">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fitsSystemWindows="true">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_scrollFlags="scroll">
+
+
+                <com.github.fujianlian.klinechart.KLineChartView
+                    android:id="@+id/kLineChartView"
+                    android:layout_width="match_parent"
+                    android:layout_height="520dp"
+                    android:layout_below="@+id/timePanel" />
+
+
+                <include
+                    android:id="@+id/indexPanelExtra"
+                    layout="@layout/kc_index_popup"
+                    android:layout_width="match_parent"
+                    android:layout_height="520dp"
+                    android:layout_below="@+id/timePanel"
+                    android:visibility="gone" />
+
+                <include
+                    android:id="@+id/timePanelExtra"
+                    layout="@layout/kc_time_popup"
+                    android:layout_width="match_parent"
+                    android:layout_height="520dp"
+                    android:layout_below="@+id/timePanel"
+                    android:visibility="gone" />
+
+
+                <include
+                    android:id="@+id/timePanel"
+                    layout="@layout/kc_panel_time"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/topPanel" />
+
+                <include
+                    android:id="@+id/topPanel"
+                    layout="@layout/kc_panel_top"
+                    android:layout_width="match_parent"
+                    android:layout_height="88dp" />
+
+            </RelativeLayout>
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tab_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:tabIndicatorColor="@color/chart_line"
+                app:tabIndicatorHeight="2dp"
+                app:tabSelectedTextColor="@color/chart_line"
+                app:tabTextColor="@color/chart_text" />
+
+        </com.google.android.material.appbar.AppBarLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-
-            <com.github.fujianlian.klinechart.KLineChartView
-                android:id="@+id/kLineChartView"
-                android:layout_width="match_parent"
-                android:layout_height="500dp"
-                android:layout_below="@+id/timePanel" />
-
-
-            <com.google.android.material.tabs.TabLayout xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/tab_layout"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:layout_below="@+id/kLineChartView"
-                app:tabIndicatorColor="@color/F40a3e8"
-                app:tabIndicatorHeight="2dp"
-                app:tabSelectedTextColor="@color/F40a3e8"
-                app:tabTextColor="@color/F40a3e8" />
-
-            <com.season.klinechart.AutofitHeightViewPager
+            <androidx.viewpager.widget.ViewPager
                 android:id="@+id/tab_View"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_below="@+id/tab_layout" />
-
-            <include
-                android:id="@+id/indexPanelExtra"
-                layout="@layout/kc_index_popup"
-                android:visibility="gone"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_below="@+id/timePanel" />
-            <include
-                android:id="@+id/timePanelExtra"
-                layout="@layout/kc_time_popup"
-                android:visibility="gone"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_below="@+id/timePanel" />
-
-
-            <include
-                android:id="@+id/timePanel"
-                layout="@layout/kc_panel_time"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/topPanel" />
-
-            <include
-                android:id="@+id/topPanel"
-                android:layout_width="match_parent"
-                android:layout_height="88dp"
-                layout="@layout/kc_panel_top" />
-
+                android:layout_height="match_parent" />
         </RelativeLayout>
 
-    </ScrollView>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 
 </LinearLayout>

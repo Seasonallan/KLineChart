@@ -7,6 +7,7 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 
 import com.github.fujianlian.klinechart.KLineEntity;
+import com.season.klinechart.fragment.DealRecord;
 
 import org.java_websocket.client.WebSocketClient;
 import org.java_websocket.handshake.ServerHandshake;
@@ -187,6 +188,7 @@ public class WebSocketService {
                     }
                 } else {
                     //更新最新数据
+                    Log.e("JWebSClientService", jsonObject.toString());
                     JSONArray areaArray = jsonObject.getJSONArray("area");
                     for (int i = 0; i < areaArray.length(); i++) {
                         JSONObject itemObject = areaArray.getJSONObject(i);
@@ -205,6 +207,33 @@ public class WebSocketService {
                                     notifyCurrentPrice(beanPrice);
                                     break;
                                 }
+                            }
+                            break;
+                        }
+                    }
+                    JSONArray buySellDataArray = jsonObject.getJSONArray("buySellData");
+                    for (int i = 0; i < areaArray.length(); i++) {
+                        JSONObject itemObject = buySellDataArray.getJSONObject(i);
+                        if (coinCode.equals(itemObject.getString("symbolId"))) {
+                            JSONObject payload = itemObject.getJSONObject("payload");
+                            JSONObject trades = payload.getJSONObject("trades");
+                            if (trades.has("amount")){
+                                JSONArray amountArray = trades.getJSONArray("amount");
+                                JSONArray priceArray = trades.getJSONArray("price");
+                                JSONArray timeArray = trades.getJSONArray("time");
+                                JSONArray directionArray = trades.getJSONArray("direction");
+
+                                List<DealRecord> dealRecordList = new ArrayList<>();
+                                for (int j = 0; j < amountArray.length(); j++) {
+                                    DealRecord dealRecord = new DealRecord();
+                                    dealRecord.setAmount(amountArray.getDouble(j));
+                                    dealRecord.setDirection(directionArray.getInt(i));
+                                    dealRecord.setPrice(priceArray.getString(j));
+                                    dealRecord.setTime(timeArray.getInt(j));
+                                    dealRecord.setId(dealRecord.getTime());
+                                    dealRecordList.add(dealRecord);
+                                }
+                                notifyTradeRecord(dealRecordList);
                             }
                             break;
                         }
@@ -281,6 +310,7 @@ public class WebSocketService {
         void onChartChange(List<KLineEntity> data);
         void onSubscribe(boolean update, KLineEntity data);
         void onSocketConnected(int index);
+        void onTradeChange(List<DealRecord> list);
     }
 
     /**
@@ -302,6 +332,12 @@ public class WebSocketService {
     }
 
 
+    private void notifyTradeRecord(List<DealRecord> list) {
+        if (messageResponseListener != null) {
+            messageResponseListener.onTradeChange(list);
+        }
+    }
+
     /**
      *
      * @param price
@@ -318,9 +354,13 @@ public class WebSocketService {
             if (null != clientChart) {
                 clientChart.close();
             }
+            if (null != clientTrade) {
+                clientTrade.close();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
+            clientTrade = null;
             clientChart = null;
         }
     }

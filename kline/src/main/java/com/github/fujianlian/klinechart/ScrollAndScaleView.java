@@ -183,6 +183,7 @@ public abstract class ScrollAndScaleView extends RelativeLayout implements
                 x = event.getX();
                 break;
             case MotionEvent.ACTION_MOVE:
+                requestDisallowInterceptTouchEvent(true);
                 //长按之后移动
                 if (isLongPress) {
                     onLongPress(event);
@@ -197,10 +198,12 @@ public abstract class ScrollAndScaleView extends RelativeLayout implements
                         isLongPress = false;
                     }
                 }
+                requestDisallowInterceptTouchEvent(false);
                 touch = false;
                 invalidate();
                 break;
             case MotionEvent.ACTION_CANCEL:
+                requestDisallowInterceptTouchEvent(false);
                 isLongPress = false;
                 touch = false;
                 invalidate();
