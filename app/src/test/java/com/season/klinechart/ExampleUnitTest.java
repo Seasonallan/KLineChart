@@ -2,6 +2,8 @@ package com.season.klinechart;
 
 import org.junit.Test;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.text.DecimalFormat;
 
 import static org.junit.Assert.*;
@@ -16,9 +18,9 @@ public class ExampleUnitTest {
     public void addition_isCorrect() {
         assertEquals(4, 2 + 2);
 
-        DecimalFormat dfRMB = new DecimalFormat("#,#0.00");
+        DecimalFormat dfRMB = new DecimalFormat("#,###.00");
 
-        System.out.println(""+ dfRMB.format(2.002));
+        System.out.println(""+ dfRMB.format(new BigDecimal("10000000000000000000000000.646212")));
 
     }
 }

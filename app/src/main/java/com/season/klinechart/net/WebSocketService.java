@@ -159,7 +159,7 @@ public class WebSocketService {
                                 notifySubscribe(true, kLineEntity);
                             }
                         }
-                        Log.e("JWebSClientService",  timeInterval + "-->>  "+kLineEntity.Date + "--"+ (kLineEntity.Time - currentTime));
+                        //Log.e("JWebSClientService",  timeInterval + "-->>  "+kLineEntity.Date + "--"+ (kLineEntity.Time - currentTime));
                     } else if (type.equals("one")) {
                         //第一次加载所有数据
                         List<KLineEntity> data = new ArrayList<>();
@@ -176,10 +176,10 @@ public class WebSocketService {
                             kLineEntity.Date = new SimpleDateFormat("MM-dd HH:mm").format(new Date(kLineEntity.Time));
                             kLineEntity.Volume = Float.parseFloat(object.getString("count"));
                             if (kLineEntity.Volume != 0){
-                                Log.e("JWebSClientService", "append>>"+ kLineEntity.Date + "-->>"+kLineEntity.Time);
+                                //Log.e("JWebSClientService", "append>>"+ kLineEntity.Date + "-->>"+kLineEntity.Time);
                                 data.add(kLineEntity);
                             }else{
-                                Log.e("JWebSClientService", kLineEntity.Date + "-->>"+ kLineEntity.Time);
+                                //Log.e("JWebSClientService", kLineEntity.Date + "-->>"+ kLineEntity.Time);
                             }
                         }
                         currentTime = data.get(data.size() - 1).Time;
@@ -188,7 +188,7 @@ public class WebSocketService {
                     }
                 } else {
                     //更新最新数据
-                    Log.e("JWebSClientService", jsonObject.toString());
+                    //Log.e("JWebSClientService", jsonObject.toString());
                     JSONArray areaArray = jsonObject.getJSONArray("area");
                     for (int i = 0; i < areaArray.length(); i++) {
                         JSONObject itemObject = areaArray.getJSONObject(i);

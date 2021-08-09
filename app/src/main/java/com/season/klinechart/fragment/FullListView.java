@@ -1,4 +1,4 @@
-package com.season.klinechart;
+package com.season.klinechart.fragment;
 
 import android.content.Context;
 import android.util.AttributeSet;

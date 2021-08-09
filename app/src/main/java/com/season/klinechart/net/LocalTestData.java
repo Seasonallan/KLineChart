@@ -1,4 +1,4 @@
-package com.season.klinechart;
+package com.season.klinechart.net;
 
 import android.content.Context;
 
@@ -13,12 +13,8 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * 模拟网络请求
- * Created by tifezh on 2017/7/3.
- */
 
-public class DataRequest {
+public class LocalTestData {
     private static List<KLineEntity> datas = null;
 
     public static String getStringFromAssert(Context context, String fileName) {

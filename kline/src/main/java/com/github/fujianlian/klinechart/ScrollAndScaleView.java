@@ -79,6 +79,7 @@ public abstract class ScrollAndScaleView extends RelativeLayout implements
     @Override
     public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
         if (!isLongPress && !isMultipleTouch()) {
+            requestDisallowInterceptTouchEvent(true);
             scrollBy(Math.round(distanceX), 0);
             return true;
         }
@@ -87,6 +88,7 @@ public abstract class ScrollAndScaleView extends RelativeLayout implements
 
     @Override
     public void onLongPress(MotionEvent e) {
+        requestDisallowInterceptTouchEvent(true);
         isLongPress = true;
     }
 
@@ -183,7 +185,6 @@ public abstract class ScrollAndScaleView extends RelativeLayout implements
                 x = event.getX();
                 break;
             case MotionEvent.ACTION_MOVE:
-                requestDisallowInterceptTouchEvent(true);
                 //长按之后移动
                 if (isLongPress) {
                     onLongPress(event);

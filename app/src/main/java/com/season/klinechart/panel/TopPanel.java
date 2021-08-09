@@ -8,6 +8,8 @@ import com.github.fujianlian.klinechart.KLineChartView;
 import com.season.klinechart.R;
 import com.season.klinechart.net.BeanPrice;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.text.DecimalFormat;
 
 public class TopPanel {
@@ -62,6 +64,6 @@ public class TopPanel {
     }
 
     public static String getValueDot(String value) {
-        return dfRMB.format(Double.parseDouble(value));
+        return dfRMB.format(new BigDecimal((value)));
     }
 }

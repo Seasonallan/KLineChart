@@ -1,6 +1,7 @@
 package com.season.klinechart;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,6 +19,7 @@ import com.season.klinechart.fragment.BriefFragment;
 import com.season.klinechart.fragment.DealFragment;
 import com.season.klinechart.fragment.DealRecord;
 import com.season.klinechart.net.BeanPrice;
+import com.season.klinechart.net.LocalTestData;
 import com.season.klinechart.net.WebSocketService;
 import com.season.klinechart.panel.TimePanel;
 import com.season.klinechart.panel.TopPanel;
@@ -32,6 +34,7 @@ public class MainActivity extends AppCompatActivity implements WebSocketService.
     KLineChartAdapter adapter;
 
     DealFragment dealFragment;
+    BriefFragment briefFragment;
     String coinCode = "BTC_USDT";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +43,6 @@ public class MainActivity extends AppCompatActivity implements WebSocketService.
 
         WebSocketService.getInstance().register(this);
         WebSocketService.getInstance().connect(Configure.socketUrl, coinCode);
-        //WebSocketService.getInstance().connect("ws://api-new-test.sgpexchange.com/deep", "BTC_USDT");
 
         kLineChartView = findViewById(R.id.kLineChartView);
         adapter = new KLineChartAdapter();
@@ -63,11 +65,14 @@ public class MainActivity extends AppCompatActivity implements WebSocketService.
         });
 
         dealFragment = DealFragment.getInstance();
+        briefFragment = BriefFragment.getInstance();
+        briefFragment.coinCode = coinCode;
+        briefFragment.langCode = "zh_CN";
         dealFragment.coinCode = coinCode;
         //将fragment装进列表中
         List<Fragment> list_fragment = new ArrayList<>();
         list_fragment.add(dealFragment);
-        list_fragment.add(BriefFragment.getInstance());
+        list_fragment.add(briefFragment);
         //将名称加载tab名字列表，正常情况下，我们应该在values/arrays.xml中进行定义然后调用
         ArrayList<String> list_title = new ArrayList<>();
         list_title.add("成交");
@@ -109,7 +114,7 @@ public class MainActivity extends AppCompatActivity implements WebSocketService.
         kLineChartView.justShowLoading();
         if (false) {
             new Thread(() -> {
-                List<KLineEntity> data = DataRequest.getALL(MainActivity.this);
+                List<KLineEntity> data = LocalTestData.getALL(MainActivity.this);
                 DataHelper.calculate(data);
                 runOnUiThread(() -> {
                     adapter.addFooterData(data);
@@ -180,12 +185,7 @@ public class MainActivity extends AppCompatActivity implements WebSocketService.
     public void onSocketConnected(int index) {
         if (index == 0) {
             //订阅曲线
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    timePanel.timeSwitch("15");
-                }
-            });
+            runOnUiThread(() -> timePanel.timeSwitch("15"));
         } else {
             //订阅交易记录
             WebSocketService.getInstance().subscribeTrade();
