@@ -1,3 +1,49 @@
 <resources>
     <string name="app_name">KLineChartLib</string>
+
+    <string name="timesharing">分时</string>
+    <string name="minute1">1分</string>
+    <string name="minute5">5分</string>
+    <string name="minute15">15分</string>
+    <string name="minute30">30分</string>
+    <string name="hour1">1时</string>
+    <string name="hour4">4时</string>
+    <string name="more">更多</string>
+    <string name="index">指标</string>
+    <string name="dayly_line">日线</string>
+    <string name="weekly_line">周线</string>
+
+    <string name="main_pic">主图</string>
+    <string name="second_pic">副图</string>
+    <string name="time">时间</string>
+    <string name="orientation">方向</string>
+    <string name="price">价格</string>
+    <string name="number">数量</string>
+
+    <string name="hour24_highest">24 最高</string>
+    <string name="hour24_lowest">24 最低</string>
+    <string name="hour24_amount">24 量</string>
+
+    <string name="high_price">高:</string>
+    <string name="low_price">低:</string>
+    <string name="open_price">开:</string>
+    <string name="last_price">收:</string>
+    <string name="depth">深度</string>
+    <string name="trade_type">类型</string>
+    <string name="deal">成交</string>
+    <string name="brief">简介</string>
+    <string name="buy">买入</string>
+    <string name="sale">卖出</string>
+
+    <string name="public_time">发行时间</string>
+    <string name="public_amount">发行总量</string>
+    <string name="circulation_amount">流通总量</string>
+    <string name="crowd_price">众筹价格</string>
+    <string name="white_paper">白皮书</string>
+    <string name="official_website">官网</string>
+    <string name="block_query">区块查询</string>
+    <string name="coin_brief">币种简介</string>
+    <string name="order">委托挂单</string>
+    <string name="order_buy">买盘</string>
+    <string name="order_sell">卖盘</string>
 </resources>

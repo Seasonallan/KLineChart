@@ -1,0 +1,46 @@
+<resources>
+    <string name="app_name">Klinechart</string>
+
+    <string name="timesharing">Partage de temps</string>
+    <string name="minute1">1m</string>
+    <string name="minute5">5m</string>
+    <string name="minute15">15m</string>
+    <string name="minute30">30m</string>
+    <string name="hour1">1h</string>
+    <string name="hour4">4h</string>
+    <string name="more">Plus</string>
+    <string name="index">indice</string>
+    <string name="dayly_line">du quotidien</string>
+    <string name="weekly_line">Ligne de la semaine</string>
+    <string name="main_pic">Image principale</string>
+    <string name="second_pic">Photo latérale</string>
+    <string name="hour24_highest">24 le plus élevé</string>
+    <string name="hour24_lowest">24 le plus bas</string>
+    <string name="hour24_amount">24 le montant</string>
+    <string name="high_price">haute:</string>
+    <string name="low_price">faible:</string>
+    <string name="open_price">ouvert:</string>
+    <string name="last_price">Recevoir:</string>
+    <string name="depth">profondeur</string>
+    <string name="deal">Traiter</string>
+    <string name="brief">introduction</string>
+    <string name="time">temps</string>
+    <string name="orientation">direction</string>
+    <string name="trade_type">Types de</string>
+    <string name="price">prix</string>
+    <string name="number">Quantité</string>
+    <string name="buy">Acheter</string>
+    <string name="sale">Vendre</string>
+
+    <string name="public_time">publier l\'heure</string>
+    <string name="public_amount">Emission totale</string>
+    <string name="circulation_amount">Diffusion totale</string>
+    <string name="crowd_price">Prix ​​du financement participatif</string>
+    <string name="white_paper">papier blanc</string>
+    <string name="official_website">Site officiel</string>
+    <string name="block_query">Bloquer la requête</string>
+    <string name="coin_brief">Introduction à la monnaie</string>
+    <string name="order">Ordre entrust</string>
+    <string name="order_buy">买盘</string>
+    <string name="order_sell">卖盘</string>
+</resources>

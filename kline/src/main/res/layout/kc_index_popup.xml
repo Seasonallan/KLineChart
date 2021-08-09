@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <View
+        android:id="@+id/index_background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0"
+        android:background="#000000" />
+
+    <LinearLayout
+        android:id="@+id/index_top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/chart_dark"
+        android:orientation="vertical"
+        android:padding="8dp">
+
+
+        <TextView
+            android:id="@+id/text1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/main_pic"
+            android:textColor="@color/chart_white"
+            android:textSize="14sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="8dp">
+
+            <TextView
+                android:id="@+id/maText"
+                android:layout_width="88dp"
+                android:layout_height="32dp"
+                android:background="@drawable/btn_circle_deep"
+                android:gravity="center"
+                android:padding="6dp"
+                android:text="MA"
+                android:textColor="@color/chart_text"
+                android:textSize="12sp" />
+
+
+            <TextView
+                android:id="@+id/bollText"
+                android:layout_width="88dp"
+                android:layout_height="32dp"
+                android:layout_marginLeft="8dp"
+                android:background="@drawable/btn_circle_deep"
+                android:gravity="center"
+                android:padding="6dp"
+                android:text="BOLL"
+                android:textColor="@color/chart_text"
+                android:textSize="12sp" />
+
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/text2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingTop="16dp"
+            android:text="@string/second_pic"
+            android:textColor="@color/chart_white"
+            android:textSize="14sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="8dp">
+
+            <RadioGroup
+                android:id="@+id/k_Group"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingBottom="8dp">
+
+                <RadioButton
+                    android:id="@+id/macdText"
+                    style="@style/StockTabStyle"
+                    android:text="MACD" />
+
+                <RadioButton
+                    android:id="@+id/kdjText"
+                    style="@style/StockTabStyle"
+                    android:layout_marginLeft="8dp"
+                    android:text="KDJ" />
+
+                <RadioButton
+                    android:id="@+id/rsiText"
+                    style="@style/StockTabStyle"
+                    android:layout_marginLeft="8dp"
+                    android:text="RSI" />
+
+                <RadioButton
+                    android:id="@+id/wrText"
+                    style="@style/StockTabStyle"
+                    android:layout_marginLeft="8dp"
+                    android:text="WR" />
+
+            </RadioGroup>
+        </LinearLayout>
+    </LinearLayout>
+</FrameLayout>

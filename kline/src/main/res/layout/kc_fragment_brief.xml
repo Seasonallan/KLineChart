@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginHorizontal="10dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/text_one"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="20dp"
+            android:text="以太币（ETH）"
+            android:textColor="@color/chart_white"
+            android:textSize="18sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/public_time"
+                android:textColor="@color/chart_text"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/text_two"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="end"
+                android:text="---"
+                android:textColor="@color/chart_white"
+                android:textSize="13sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/public_amount"
+                android:textColor="@color/chart_text"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/text_three"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="end"
+                android:text="---"
+                android:textColor="@color/chart_white"
+                android:textSize="13sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/circulation_amount"
+                android:textColor="@color/chart_text"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/text_for"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="end"
+                android:text="---"
+                android:textColor="@color/chart_white"
+                android:textSize="13sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/crowd_price"
+                android:textColor="@color/chart_text"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/text_see"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="end"
+                android:text="---"
+                android:textColor="@color/chart_white"
+                android:textSize="13sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/white_paper"
+                android:textColor="@color/chart_text"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/text_sve"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:gravity="end"
+                android:maxEms="26"
+                android:maxLines="1"
+                android:text=""
+                android:textColor="@color/chart_white"
+                android:textSize="13sp" />
+
+            <View
+                android:id="@+id/text_sve_copy"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_marginLeft="4dp"
+                android:background="@mipmap/ic_text_white_copy" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/official_website"
+                android:textColor="@color/chart_text"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/text_fiv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:gravity="end"
+                android:maxEms="26"
+                android:maxLines="1"
+                android:text=""
+                android:textColor="@color/chart_white"
+                android:textSize="13sp" />
+
+            <View
+                android:id="@+id/text_fiv_copy"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_marginLeft="4dp"
+                android:background="@mipmap/ic_text_white_copy" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/block_query"
+                android:textColor="@color/chart_text"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/text_night"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:gravity="center_vertical|end"
+                android:maxEms="26"
+                android:maxLines="1"
+                android:text=""
+                android:textColor="@color/chart_white"
+                android:textSize="13sp" />
+
+            <View
+                android:id="@+id/text_night_copy"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_marginLeft="4dp"
+                android:background="@mipmap/ic_text_white_copy" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:paddingBottom="24dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="10dp"
+                android:text="@string/brief"
+                android:textColor="@color/chart_white"
+                android:textSize="21sp" />
+
+            <TextView
+                android:id="@+id/text_nie"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:lineSpacingExtra="8dp"
+                android:text=""
+                android:textColor="@color/chart_white"
+                android:textSize="16sp" />
+        </LinearLayout>
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

@@ -1,0 +1,46 @@
+<resources>
+    <string name="app_name">Klinechart</string>
+
+    <string name="timesharing">시간 공유</string>
+    <string name="minute1">1분</string>
+    <string name="minute5">5분</string>
+    <string name="minute15">15분</string>
+    <string name="minute30">30분</string>
+    <string name="hour1">1시</string>
+    <string name="hour4">4시</string>
+    <string name="more">더</string>
+    <string name="index">인덱스</string>
+    <string name="dayly_line">매일</string>
+    <string name="weekly_line">주 라인</string>
+    <string name="main_pic">주요 사진</string>
+    <string name="second_pic">측면 사진</string>
+    <string name="hour24_highest">24 제일 높은</string>
+    <string name="hour24_lowest">24 최저</string>
+    <string name="hour24_amount">24 금액</string>
+    <string name="high_price">높은:</string>
+    <string name="low_price">낮은:</string>
+    <string name="open_price">열다:</string>
+    <string name="last_price">받다:</string>
+    <string name="depth">깊이</string>
+    <string name="deal">거래</string>
+    <string name="brief">소개</string>
+    <string name="time">시각</string>
+    <string name="orientation">방향</string>
+    <string name="trade_type">유형</string>
+    <string name="price">가격</string>
+    <string name="number">수량</string>
+    <string name="buy">구매</string>
+    <string name="sale">팔다</string>
+
+    <string name="public_time">게시 시간</string>
+    <string name="public_amount">총 발행</string>
+    <string name="circulation_amount">총 순환</string>
+    <string name="crowd_price">크라우드 펀딩 가격</string>
+    <string name="white_paper">백지</string>
+    <string name="official_website">공식 웹 사이트</string>
+    <string name="block_query">블록 쿼리</string>
+    <string name="coin_brief">통화 소개</string>
+    <string name="order">위임장</string>
+    <string name="order_buy">买盘</string>
+    <string name="order_sell">卖盘</string>
+</resources>

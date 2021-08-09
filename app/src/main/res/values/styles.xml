@@ -8,22 +8,5 @@
         <item name="android:windowBackground">@color/colorAccent</item>
     </style>
 
-    <style name="StockTabStyle">
-        <item name="android:layout_height">32dp</item>
-        <item name="android:layout_width">0dp</item>
-        <item name="android:layout_weight">1</item>
-        <item name="android:gravity">center</item>
-        <item name="android:textSize">12dp</item>
-        <item name="android:padding">6dp</item>
-        <item name="android:button">@null</item>
-        <item name="android:textColor">@color/tv_select_blue</item>
-        <item name="android:background">@drawable/btn_radio_deep</item>
-    </style>
-
-    <style name="contextMenuAnim" mce_bogus="1" parent="android:Animation">
-        <item name="android:windowEnterAnimation">@anim/pop_in</item>
-        <item name="android:windowExitAnimation">@anim/pop_out</item>
-    </style>
-
 
 </resources>

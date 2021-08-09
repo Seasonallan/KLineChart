@@ -1,0 +1,46 @@
+<resources>
+    <string name="app_name">Klinechart</string>
+
+    <string name="timesharing">Time sharing</string>
+    <string name="minute1">1m</string>
+    <string name="minute5">5m</string>
+    <string name="minute15">15m</string>
+    <string name="minute30">30m</string>
+    <string name="hour1">1h</string>
+    <string name="hour4">4h</string>
+    <string name="more">More</string>
+    <string name="index">Index</string>
+    <string name="dayly_line">Daily</string>
+    <string name="weekly_line">Weekly</string>
+    <string name="main_pic">Main picture</string>
+    <string name="second_pic">Side picture</string>
+    <string name="hour24_highest">24 highest</string>
+    <string name="hour24_lowest">24 lowest</string>
+    <string name="hour24_amount">24 amount</string>
+    <string name="high_price">high:</string>
+    <string name="low_price">low:</string>
+    <string name="open_price">open:</string>
+    <string name="last_price">Receive:</string>
+    <string name="depth">depth</string>
+    <string name="deal">Deal</string>
+    <string name="brief">Brief</string>
+    <string name="time">time</string>
+    <string name="orientation">direction</string>
+    <string name="trade_type">Types</string>
+    <string name="price">Price</string>
+    <string name="number">Quantity</string>
+    <string name="buy">Buy</string>
+    <string name="sale">Sell</string>
+
+    <string name="public_time">Publish time</string>
+    <string name="public_amount">Total issuance</string>
+    <string name="circulation_amount">Total circulation</string>
+    <string name="crowd_price">Crowdfunding price</string>
+    <string name="white_paper">White paper</string>
+    <string name="official_website">Official website</string>
+    <string name="block_query">Block query</string>
+    <string name="coin_brief">Introduction to currency</string>
+    <string name="order">Order</string>
+    <string name="order_buy">买盘</string>
+    <string name="order_sell">卖盘</string>
+</resources>

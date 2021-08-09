@@ -1,0 +1,46 @@
+<resources>
+    <string name="app_name">Klinechart</string>
+
+    <string name="timesharing">時間を共有する</string>
+    <string name="minute1">1分</string>
+    <string name="minute5">5分</string>
+    <string name="minute15">15分</string>
+    <string name="minute30">30分</string>
+    <string name="hour1">1時</string>
+    <string name="hour4">4時</string>
+    <string name="more">もっと</string>
+    <string name="index">インデックス</string>
+    <string name="dayly_line">毎日</string>
+    <string name="weekly_line">ウィークライン</string>
+    <string name="main_pic">メイン画像</string>
+    <string name="second_pic">側面図</string>
+    <string name="hour24_highest">24 最高</string>
+    <string name="hour24_lowest">24 最低</string>
+    <string name="hour24_amount">24 総額</string>
+    <string name="high_price">高い:</string>
+    <string name="low_price">低:</string>
+    <string name="open_price">開いた:</string>
+    <string name="last_price">受け取る:</string>
+    <string name="depth">深さ</string>
+    <string name="deal">対処</string>
+    <string name="brief">前書き</string>
+    <string name="time">時間</string>
+    <string name="orientation">方向</string>
+    <string name="trade_type">の種類</string>
+    <string name="price">価格</string>
+    <string name="number">量</string>
+    <string name="buy">バイイン</string>
+    <string name="sale">売る</string>
+
+    <string name="public_time">公開時間</string>
+    <string name="public_amount">総発行</string>
+    <string name="circulation_amount">総循環</string>
+    <string name="crowd_price">クラウドファンディング価格</string>
+    <string name="white_paper">白書</string>
+    <string name="official_website">公式ウェブサイト</string>
+    <string name="block_query">クエリをブロックする</string>
+    <string name="coin_brief">通貨の紹介</string>
+    <string name="order">伝票を切る</string>
+    <string name="order_buy">买盘</string>
+    <string name="order_sell">卖盘</string>
+</resources>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:orientation="horizontal"
+    android:paddingVertical="10dp">
+
+    <TextView
+        android:id="@+id/time_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="@string/order_buy"
+        android:textColor="@color/chart_grid_line"
+        android:textSize="11sp" />
+
+    <TextView
+        android:id="@+id/direction_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="@string/orientation"
+        android:textColor="@color/chart_grid_line"
+        android:textSize="11sp" />
+
+    <TextView
+        android:id="@+id/price_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="@string/price"
+        android:textColor="@color/chart_grid_line"
+        android:textSize="11sp" />
+
+    <TextView
+        android:id="@+id/num_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="@string/order_sell"
+        android:textColor="@color/chart_grid_line"
+        android:textSize="11sp" />
+</LinearLayout>

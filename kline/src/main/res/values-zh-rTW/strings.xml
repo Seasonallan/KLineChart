@@ -1,0 +1,46 @@
+<resources>
+    <string name="app_name">Klinechart</string>
+
+    <string name="timesharing">分時</string>
+    <string name="minute1">1分</string>
+    <string name="minute5">5分</string>
+    <string name="minute15">15分</string>
+    <string name="minute30">30分</string>
+    <string name="hour1">1時</string>
+    <string name="hour4">4時</string>
+    <string name="more">更多</string>
+    <string name="index">指標</string>
+    <string name="dayly_line">日綫</string>
+    <string name="weekly_line">周綫</string>
+    <string name="main_pic">主圖</string>
+    <string name="second_pic">副圖</string>
+    <string name="hour24_highest">24 最高</string>
+    <string name="hour24_lowest">24 最低</string>
+    <string name="hour24_amount">24 量</string>
+    <string name="high_price">高:</string>
+    <string name="low_price">低:</string>
+    <string name="open_price">開:</string>
+    <string name="last_price">收:</string>
+    <string name="depth">深度</string>
+    <string name="deal">成交</string>
+    <string name="brief">簡介</string>
+    <string name="time">時間</string>
+    <string name="orientation">方向</string>
+    <string name="trade_type">類型</string>
+    <string name="price">價格</string>
+    <string name="number">數量</string>
+    <string name="buy">買入</string>
+    <string name="sale">賣出</string>
+
+    <string name="public_time">發行時間</string>
+    <string name="public_amount">發行總量</string>
+    <string name="circulation_amount">流通總量</string>
+    <string name="crowd_price">衆籌價格</string>
+    <string name="white_paper">白皮書</string>
+    <string name="official_website">官網</string>
+    <string name="block_query">區塊查詢</string>
+    <string name="coin_brief">幣種簡介</string>
+    <string name="order">委托掛單</string>
+    <string name="order_buy">买盘</string>
+    <string name="order_sell">卖盘</string>
+</resources>

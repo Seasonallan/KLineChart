@@ -1,0 +1,46 @@
+<resources>
+    <string name="app_name">Klinechart</string>
+
+    <string name="timesharing">Tiempo compartido</string>
+    <string name="minute1">1m</string>
+    <string name="minute5">5m</string>
+    <string name="minute15">15m</string>
+    <string name="minute30">30m</string>
+    <string name="hour1">1h</string>
+    <string name="hour4">4h</string>
+    <string name="more">Más</string>
+    <string name="index">índice</string>
+    <string name="dayly_line">Diario</string>
+    <string name="weekly_line">Línea de la semana</string>
+    <string name="main_pic">Imagen principal</string>
+    <string name="second_pic">Imagen lateral</string>
+    <string name="hour24_highest">24 mas alto</string>
+    <string name="hour24_lowest">24 más bajo</string>
+    <string name="hour24_amount">24 la cantidad</string>
+    <string name="high_price">alto:</string>
+    <string name="low_price">bajo:</string>
+    <string name="open_price">abierto:</string>
+    <string name="last_price">Recibir:</string>
+    <string name="depth">profundidad</string>
+    <string name="deal">Acuerdo</string>
+    <string name="brief">Introducción</string>
+    <string name="time">hora</string>
+    <string name="orientation">dirección</string>
+    <string name="trade_type">Tipos de</string>
+    <string name="price">precio</string>
+    <string name="number">Cantidad</string>
+    <string name="buy">Aceptacion</string>
+    <string name="sale">Vender</string>
+
+    <string name="public_time">publicar tiempo</string>
+    <string name="public_amount">Emisión total</string>
+    <string name="circulation_amount">Circulación total</string>
+    <string name="crowd_price">Precio del crowdfunding</string>
+    <string name="white_paper">papel blanco</string>
+    <string name="official_website">Página web oficial</string>
+    <string name="block_query">Consulta de bloque</string>
+    <string name="coin_brief">Introducción a la moneda</string>
+    <string name="order">Bestellung anvertrauen</string>
+    <string name="order_buy">买盘</string>
+    <string name="order_sell">卖盘</string>
+</resources>
