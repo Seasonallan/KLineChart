@@ -39,5 +39,5 @@ dependencies {
 
 
     implementation project(':kline')
-    //implementation "org.java-websocket:Java-WebSocket:1.4.0"
+    //implementation 'com.github.Seasonallan:KLineChart:1.0'
 }
