@@ -7,11 +7,11 @@ import android.graphics.Paint;
 import androidx.core.content.ContextCompat;
 
 import com.season.klinechart.BaseKLineChartView;
+import com.season.klinechart.ColorStrategy;
 import com.season.klinechart.base.IChartDraw;
 import com.season.klinechart.base.IValueFormatter;
 import com.season.klinechart.entity.IMACD;
 import com.season.klinechart.formatter.ValueFormatter;
-import com.season.mylibrary.R;
 
 /**
  * macd实现类
@@ -32,8 +32,8 @@ public class MACDDraw implements IChartDraw<IMACD> {
 
     public MACDDraw(BaseKLineChartView view) {
         Context context = view.getContext();
-        mRedPaint.setColor(ContextCompat.getColor(context, R.color.chart_red));
-        mGreenPaint.setColor(ContextCompat.getColor(context, R.color.chart_green));
+        mRedPaint.setColor(ContextCompat.getColor(context, ColorStrategy.getStrategy().getRiseColor()));
+        mGreenPaint.setColor(ContextCompat.getColor(context, ColorStrategy.getStrategy().getFallColor()));
     }
 
     @Override

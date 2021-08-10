@@ -6,9 +6,12 @@ public class Configure {
     public static String briefUrl = "http://api.sgpexchange.com/api/klinevtwo/tradingview";
 
 
-    public static String socketUrlPre = "ws://api-new-test.sgpexchange.com/deep";
-    public static String briefUrlPre = "http://api-new-pre.sgpexchange.com/api/klinevtwo/tradingview";
+    public static String socketUrlTest = "ws://api-new-test.sgpexchange.com/deep";
+    public static String briefUrlTest = "http://api-new-test.sgpexchange.com/api/klinevtwo/tradingview";
 
+
+    public static String socketUrlPre = "ws://api-new-pre.sgpexchange.com/deep";
+    public static String briefUrlPre = "http://api-new-pre.sgpexchange.com/api/klinevtwo/tradingview";
 
 
 }

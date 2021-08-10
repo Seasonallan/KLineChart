@@ -4,68 +4,52 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.RadioGroup;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.season.example.KLineChartActivity;
 import com.season.klinechart.R;
+import com.season.klinechart.ColorStrategy;
 
 
 public class MainActivity extends AppCompatActivity {
+
+    RadioGroup envRadioGroup;
+    RadioGroup colorRadioGroup;
+    RadioGroup languageRadioGroup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        findViewById(R.id.tv_start).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, KLineChartActivity.class);
 
-                Bundle bundle = new Bundle();
-                bundle.putString("coinCode", "BTC_USDT");
-                bundle.putString("language", "ZH_CN");
-                bundle.putString("webSocketUrl", Configure.socketUrl);
-                bundle.putString("briefUrl", Configure.briefUrl);
+        envRadioGroup = findViewById(R.id.rg_environment);
+        colorRadioGroup = findViewById(R.id.rg_color);
+        languageRadioGroup = findViewById(R.id.rg_language);
 
-                intent.putExtra("bundle", bundle);
-                startActivityForResult(intent, 100);
-            }
-        });
+        findViewById(R.id.tv_start).setOnClickListener(view -> onButtonClicked(view));
+        findViewById(R.id.tv_start1).setOnClickListener(view -> onButtonClicked(view));
+        findViewById(R.id.tv_start2).setOnClickListener(view -> onButtonClicked(view));
+    }
 
-        findViewById(R.id.tv_start1).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, KLineChartActivity.class);
+    private void onButtonClicked(View view) {
+        Intent intent = new Intent(MainActivity.this, KLineChartActivity.class);
 
-                Bundle bundle = new Bundle();
-                bundle.putString("coinCode", "ETH_USDT");
-                bundle.putString("language", "EN");
-                bundle.putString("webSocketUrl", Configure.socketUrlPre);
-                bundle.putString("briefUrl", Configure.briefUrlPre);
+        Bundle bundle = new Bundle();
+        bundle.putString("coinCode", view.getTag().toString());
+        bundle.putString("language", findViewById(languageRadioGroup.getCheckedRadioButtonId()).getTag().toString());
+        bundle.putBoolean("riseGreen", colorRadioGroup.getCheckedRadioButtonId() == R.id.rb_color1);
 
-                intent.putExtra("bundle", bundle);
-                startActivityForResult(intent, 100);
-            }
-        });
+        bundle.putString("webSocketUrl", envRadioGroup.getCheckedRadioButtonId() == R.id.rb_environment1 ? Configure.socketUrl
+                : envRadioGroup.getCheckedRadioButtonId() == R.id.rb_environment2 ? Configure.socketUrlPre : Configure.socketUrlTest);
+        bundle.putString("briefUrl", envRadioGroup.getCheckedRadioButtonId() == R.id.rb_environment1 ? Configure.briefUrl
+                : envRadioGroup.getCheckedRadioButtonId() == R.id.rb_environment2 ? Configure.briefUrlPre : Configure.briefUrlTest);
 
-        findViewById(R.id.tv_start2).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, KLineChartActivity.class);
+        intent.putExtra("bundle", bundle);
 
-                Bundle bundle = new Bundle();
-                bundle.putString("coinCode", "ETH_USDT");
-                bundle.putString("language", "FRAS");
-                bundle.putString("webSocketUrl", Configure.socketUrlPre);
-                bundle.putString("briefUrl", Configure.briefUrlPre);
-
-                intent.putExtra("bundle", bundle);
-
-                startActivityForResult(intent, 100);
-            }
-        });
+        startActivityForResult(intent, 100);
     }
 
     @Override

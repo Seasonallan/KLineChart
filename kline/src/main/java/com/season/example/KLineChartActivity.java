@@ -25,6 +25,7 @@ import com.season.example.net.LocalTestData;
 import com.season.example.net.WebSocketService;
 import com.season.example.panel.TimePanel;
 import com.season.example.panel.TopPanel;
+import com.season.klinechart.ColorStrategy;
 import com.season.klinechart.DataHelper;
 import com.season.klinechart.DepthDataBean;
 import com.season.klinechart.DepthMapView;
@@ -94,7 +95,7 @@ public class KLineChartActivity extends AppCompatActivity implements WebSocketSe
     }
 
     DepthMapView depth_view;
-    View depth_top_view;
+    View depth_top_view, riseView, fallView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -105,12 +106,22 @@ public class KLineChartActivity extends AppCompatActivity implements WebSocketSe
             mLanguage = bundle.getString("language");
             webSocketUrl = bundle.getString("webSocketUrl");
             briefUrl = bundle.getString("briefUrl");
+            boolean color = bundle.getBoolean("riseGreen", true);
+            if (color){
+                ColorStrategy.getStrategy().setGreenRiseRedFall();
+            }else{
+                ColorStrategy.getStrategy().setRedRiseGreenFall();
+            }
         }
         setLanguage(mLanguage);
         setContentView(R.layout.activity_chart);
 
         depth_view = findViewById(R.id.depth_view);
         depth_top_view = findViewById(R.id.depth_top);
+        riseView = findViewById(R.id.depth_top_rise);
+        fallView = findViewById(R.id.depth_top_fall);
+        riseView.setBackgroundResource(ColorStrategy.getStrategy().isRiseGreen()?R.drawable.circle_green:R.drawable.circle_red);
+        fallView.setBackgroundResource(!ColorStrategy.getStrategy().isRiseGreen()?R.drawable.circle_green:R.drawable.circle_red);
 
         kLineChartView = findViewById(R.id.kLineChartView);
         adapter = new KLineChartAdapter();

@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:gravity="center"
-        android:text="@string/order_buy"
+        android:text="@string/time"
         android:textColor="@color/chart_grid_line"
         android:textSize="11sp" />
 
@@ -42,7 +42,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:gravity="center"
-        android:text="@string/order_sell"
+        android:text="@string/number"
         android:textColor="@color/chart_grid_line"
         android:textSize="11sp" />
 </LinearLayout>

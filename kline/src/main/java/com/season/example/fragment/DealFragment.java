@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.season.example.util.CoinCodeDecimalUtil;
+import com.season.klinechart.ColorStrategy;
 import com.season.mylibrary.R;
 
 import java.text.DecimalFormat;
@@ -112,7 +113,8 @@ public class DealFragment extends Fragment {
             } else {
                 holder.timeView.setText(new SimpleDateFormat("HH:mm:ss").format(new Date(item.getTime() * 1000L)));
                 holder.directionView.setText(context.getResources().getString(item.getDirection() == 1 ? R.string.buy : R.string.sale));
-                holder.directionView.setTextColor(context.getResources().getColor(item.getDirection() == 1 ? R.color.chart_green : R.color.chart_red));
+                holder.directionView.setTextColor(context.getResources().getColor(item.getDirection() == 1 ?
+                        ColorStrategy.getStrategy().getRiseColor() : ColorStrategy.getStrategy().getFallColor()));
                 holder.priceView.setText(dfCoinPrice.format(Double.parseDouble(item.getPrice())));
                 holder.numView.setText(dfCoinNumber.format(item.getAmount()));
             }

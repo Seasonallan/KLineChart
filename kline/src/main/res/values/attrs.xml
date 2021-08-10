@@ -44,7 +44,10 @@
         <attr name="kc_tab_indicator_color" format="color"/>
     </declare-styleable>
 
-
+    <style name="TabLayoutTextStyle" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">15sp</item>
+        <item name="textAllCaps">false</item>
+    </style>
 
     <!--深度图DepthMapView-->
     <declare-styleable name="DepthMapView">

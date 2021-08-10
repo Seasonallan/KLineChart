@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.season.example.util.CoinCodeDecimalUtil;
 import com.season.klinechart.DepthDataBean;
+import com.season.klinechart.ColorStrategy;
 import com.season.mylibrary.R;
 
 import java.text.DecimalFormat;
@@ -109,6 +110,8 @@ public class DepthFragment extends Fragment {
             if (position == 0) {
                 return;
             }
+            holder.price_buy_list.setTextColor(context.getResources().getColor(ColorStrategy.getStrategy().getRiseColor()));
+            holder.price_sell_list.setTextColor(context.getResources().getColor(ColorStrategy.getStrategy().getFallColor()));
             int realPosition = position - 1;
             if (buyData.size() > realPosition) {
                 DepthDataBean item = buyData.get(realPosition);

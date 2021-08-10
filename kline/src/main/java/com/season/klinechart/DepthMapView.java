@@ -19,8 +19,6 @@ import androidx.core.content.ContextCompat;
 import com.season.mylibrary.R;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 
@@ -147,10 +145,14 @@ public class DepthMapView extends View {
                 mSellLinePaint.setStrokeWidth(typedArray.getDimensionPixelSize(R.styleable.DepthMapView_line_width, dp2px(1.5f)));
                 mTextPaint.setColor(typedArray.getColor(R.styleable.DepthMapView_text_color, getColor(R.color.chart_white)));
                 mTextPaint.setTextSize(typedArray.getDimension(R.styleable.DepthMapView_text_size, getDimension(R.dimen.chart_text_size)));
-                mBuyLinePaint.setColor(typedArray.getColor(R.styleable.DepthMapView_buy_line_color, getColor(R.color.chart_green)));
-                mSellLinePaint.setColor(typedArray.getColor(R.styleable.DepthMapView_sell_line_color, getColor(R.color.chart_red)));
-                mBuyPathPaint.setColor(typedArray.getColor(R.styleable.DepthMapView_buy_path_color, getColor(R.color.chart_green_alpha)));
-                mSellPathPaint.setColor(typedArray.getColor(R.styleable.DepthMapView_sell_path_color, getColor(R.color.chart_red_alpha)));
+                mBuyLinePaint.setColor(typedArray.getColor(R.styleable.DepthMapView_buy_line_color,
+                        getColor(ColorStrategy.getStrategy().getRiseColor())));
+                mSellLinePaint.setColor(typedArray.getColor(R.styleable.DepthMapView_sell_line_color,
+                        getColor(ColorStrategy.getStrategy().getFallColor())));
+                mBuyPathPaint.setColor(typedArray.getColor(R.styleable.DepthMapView_buy_path_color,
+                        getColor(ColorStrategy.getStrategy().getRiseAlphaColor())));
+                mSellPathPaint.setColor(typedArray.getColor(R.styleable.DepthMapView_sell_path_color,
+                        getColor(ColorStrategy.getStrategy().getFallAlphaColor())));
                 mSelectorBackgroundPaint.setColor(typedArray.getColor(R.styleable.DepthMapView_selector_background_color, getColor(R.color.chart_selector)));
                 mSelectorBackgroundLinePaint.setColor(typedArray.getColor(R.styleable.DepthMapView_selector_line_color, getColor(R.color.chart_selector_line)));
             } finally {
@@ -325,10 +327,10 @@ public class DepthMapView extends View {
         if (y == null) return;
         if (position < mDrawWidth) {
             canvas.drawCircle(position, y, mCircleRadius, mBuyLinePaint);
-            mRadioPaint.setColor(getColor(R.color.chart_green));
+            mRadioPaint.setColor(getColor(ColorStrategy.getStrategy().getRiseColor()));
         } else {
             canvas.drawCircle(position, y, mCircleRadius, mSellLinePaint);
-            mRadioPaint.setColor(getColor(R.color.chart_red));
+            mRadioPaint.setColor(getColor(ColorStrategy.getStrategy().getFallColor()));
         }
         canvas.drawCircle(position, y, mDotRadius, mRadioPaint);
 

@@ -9,6 +9,7 @@ import androidx.core.content.ContextCompat;
 
 import com.season.klinechart.BaseKLineChartView;
 import com.season.klinechart.KLineChartView;
+import com.season.klinechart.ColorStrategy;
 import com.season.klinechart.base.IChartDraw;
 import com.season.klinechart.base.IValueFormatter;
 import com.season.klinechart.entity.ICandle;
@@ -51,8 +52,8 @@ public class MainDraw implements IChartDraw<ICandle> {
         Context context = view.getContext();
         kChartView = (KLineChartView) view;
         mContext = context;
-        mRedPaint.setColor(ContextCompat.getColor(context, R.color.chart_red));
-        mGreenPaint.setColor(ContextCompat.getColor(context, R.color.chart_green));
+        mRedPaint.setColor(ContextCompat.getColor(context, ColorStrategy.getStrategy().getRiseColor()));
+        mGreenPaint.setColor(ContextCompat.getColor(context, ColorStrategy.getStrategy().getFallColor()));
         mLinePaint.setColor(ContextCompat.getColor(context, R.color.chart_line));
         paint.setColor(ContextCompat.getColor(context, R.color.chart_line_background));
         mSelectorBackgroundLinePaint.setStyle(Paint.Style.STROKE);

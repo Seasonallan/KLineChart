@@ -7,12 +7,12 @@ import android.graphics.Paint;
 import androidx.core.content.ContextCompat;
 
 import com.season.klinechart.BaseKLineChartView;
+import com.season.klinechart.ColorStrategy;
 import com.season.klinechart.base.IChartDraw;
 import com.season.klinechart.base.IValueFormatter;
 import com.season.klinechart.entity.IVolume;
 import com.season.klinechart.formatter.BigValueFormatter;
 import com.season.klinechart.utils.ViewUtil;
-import com.season.mylibrary.R;
 
 /**
  * Created by hjm on 2017/11/14 17:49.
@@ -27,8 +27,8 @@ public class VolumeDraw implements IChartDraw<IVolume> {
 
     public VolumeDraw(BaseKLineChartView view) {
         Context context = view.getContext();
-        mRedPaint.setColor(ContextCompat.getColor(context, R.color.chart_red));
-        mGreenPaint.setColor(ContextCompat.getColor(context, R.color.chart_green));
+        mRedPaint.setColor(ContextCompat.getColor(context, ColorStrategy.getStrategy().getFallColor()));
+        mGreenPaint.setColor(ContextCompat.getColor(context, ColorStrategy.getStrategy().getRiseColor()));
         pillarWidth = ViewUtil.Dp2Px(context, 4);
     }
 
@@ -54,9 +54,9 @@ public class VolumeDraw implements IChartDraw<IVolume> {
         float top = view.getVolY(curPoint.getVolume());
         int bottom = view.getVolRect().bottom;
         if (curPoint.getClosePrice() >= curPoint.getOpenPrice()) {//涨
-            canvas.drawRect(curX - r, top, curX + r, bottom, mRedPaint);
-        } else {
             canvas.drawRect(curX - r, top, curX + r, bottom, mGreenPaint);
+        } else {
+            canvas.drawRect(curX - r, top, curX + r, bottom, mRedPaint);
         }
 
     }

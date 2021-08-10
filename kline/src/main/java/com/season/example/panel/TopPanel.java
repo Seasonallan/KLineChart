@@ -6,6 +6,7 @@ import android.widget.TextView;
 
 import com.season.klinechart.KLineChartView;
 import com.season.example.net.BeanPrice;
+import com.season.klinechart.ColorStrategy;
 import com.season.mylibrary.R;
 
 import java.math.BigDecimal;
@@ -54,12 +55,12 @@ public class TopPanel {
                 double percent = price.getPercent();
                 if (percent >= 0){
                     apprise.setText("+"+getValueDot(percent) + "%");
-                    k_Price.setTextColor(context.getResources().getColor(R.color.chart_green));
-                    apprise.setTextColor(context.getResources().getColor(R.color.chart_green));
+                    k_Price.setTextColor(context.getResources().getColor(ColorStrategy.getStrategy().getRiseColor()));
+                    apprise.setTextColor(context.getResources().getColor(ColorStrategy.getStrategy().getRiseColor()));
                 }else{
                     apprise.setText(getValueDot(percent) + "%");
-                    k_Price.setTextColor(context.getResources().getColor(R.color.chart_red));
-                    apprise.setTextColor(context.getResources().getColor(R.color.chart_red));
+                    k_Price.setTextColor(context.getResources().getColor(ColorStrategy.getStrategy().getFallColor()));
+                    apprise.setTextColor(context.getResources().getColor(ColorStrategy.getStrategy().getFallColor()));
                 }
             }
         });

@@ -42,7 +42,6 @@
     <string name="white_paper">白皮书</string>
     <string name="official_website">官网</string>
     <string name="block_query">区块查询</string>
-    <string name="coin_brief">币种简介</string>
     <string name="order">委托挂单</string>
     <string name="order_buy">买盘</string>
     <string name="order_sell">卖盘</string>

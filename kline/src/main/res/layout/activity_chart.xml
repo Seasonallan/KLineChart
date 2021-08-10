@@ -90,6 +90,7 @@
                     android:orientation="horizontal">
 
                     <View
+                        android:id="@+id/depth_top_rise"
                         android:layout_width="6dp"
                         android:layout_height="6dp"
                         android:background="@drawable/circle_green" />
@@ -103,6 +104,7 @@
                         android:textSize="9sp" />
 
                     <View
+                        android:id="@+id/depth_top_fall"
                         android:layout_width="6dp"
                         android:layout_height="6dp"
                         android:layout_marginLeft="16dp"
@@ -112,7 +114,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingLeft="6dp"
-                        android:text="@string/order_buy"
+                        android:text="@string/order_sell"
                         android:textColor="@color/chart_white"
                         android:textSize="9sp" />
 
@@ -155,6 +157,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:tabIndicatorColor="@color/chart_line"
+                app:tabTextAppearance="@style/TabLayoutTextStyle"
                 app:tabIndicatorHeight="2dp"
                 app:tabSelectedTextColor="@color/chart_line"
                 app:tabTextColor="@color/chart_text" />
