@@ -109,24 +109,39 @@ public class DepthFragment extends Fragment {
             if (position == 0) {
                 return;
             }
-            DepthDataBean item = buyData.get(position - 1);
-            DepthDataBean itemSell = sellData.get(position - 1);
-            if (item.getPrice() == -1) {
+            int realPosition = position - 1;
+            if (buyData.size() > realPosition) {
+                DepthDataBean item = buyData.get(realPosition);
+                if (item.getPrice() == -1) {
+                    holder.index_buy_list.setText("");
+                    holder.number_buy_list.setText("");
+                    holder.price_buy_list.setText("");
+                } else {
+                    holder.index_buy_list.setText(position + "");
+                    holder.number_buy_list.setText(dfCoinNumber.format(item.getVolume()));
+                    holder.price_buy_list.setText(dfCoinPrice.format(item.getPrice()));
+                }
+            } else {
                 holder.index_buy_list.setText("");
                 holder.number_buy_list.setText("");
                 holder.price_buy_list.setText("");
+            }
+
+            if (sellData.size() > realPosition) {
+                DepthDataBean item = sellData.get(realPosition);
+                if (item.getPrice() == -1) {
+                    holder.price_sell_list.setText("");
+                    holder.number_sell_list.setText("");
+                    holder.index_sell_list.setText("");
+                } else {
+                    holder.index_sell_list.setText(position + "");
+                    holder.number_sell_list.setText(dfCoinNumber.format(item.getVolume()));
+                    holder.price_sell_list.setText(dfCoinPrice.format(item.getPrice()));
+                }
+            } else {
                 holder.price_sell_list.setText("");
                 holder.number_sell_list.setText("");
                 holder.index_sell_list.setText("");
-            } else {
-                holder.index_buy_list.setText(position+"");
-                holder.index_sell_list.setText(position+"");
-
-                holder.number_buy_list.setText(dfCoinNumber.format(item.getVolume()));
-                holder.number_sell_list.setText(dfCoinNumber.format(itemSell.getVolume()));
-
-                holder.price_buy_list.setText(dfCoinPrice.format(item.getPrice()));
-                holder.price_sell_list.setText(dfCoinPrice.format(itemSell.getPrice()));
             }
         }
 

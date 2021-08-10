@@ -41,6 +41,6 @@
     <string name="block_query">Bloquer la requête</string>
     <string name="coin_brief">Introduction à la monnaie</string>
     <string name="order">Ordre entrust</string>
-    <string name="order_buy">买盘</string>
-    <string name="order_sell">卖盘</string>
+    <string name="order_buy">Acheter une offre</string>
+    <string name="order_sell">Vente d\'actions</string>
 </resources>

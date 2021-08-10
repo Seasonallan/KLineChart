@@ -3,6 +3,7 @@ package com.season.example;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -93,7 +94,7 @@ public class KLineChartActivity extends AppCompatActivity implements WebSocketSe
     }
 
     DepthMapView depth_view;
-
+    View depth_top_view;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -109,6 +110,7 @@ public class KLineChartActivity extends AppCompatActivity implements WebSocketSe
         setContentView(R.layout.activity_chart);
 
         depth_view = findViewById(R.id.depth_view);
+        depth_top_view = findViewById(R.id.depth_top);
 
         kLineChartView = findViewById(R.id.kLineChartView);
         adapter = new KLineChartAdapter();
@@ -124,75 +126,92 @@ public class KLineChartActivity extends AppCompatActivity implements WebSocketSe
         tab_layout = findViewById(R.id.tab_layout);
         tab_View = findViewById(R.id.tab_View);
 
-        timePanel = new TimePanel(this, kLineChartView, depth_view).act();
-        topPanel = new TopPanel(this, kLineChartView).act();
+        postRun();
 
-        findViewById(R.id.btn_back).setOnClickListener(o -> {
-            finish();
-        });
+    }
 
-        dealFragment = DealFragment.getInstance();
-        briefFragment = BriefFragment.getInstance();
-        depthFragment = DepthFragment.getInstance();
-        briefFragment.coinCode = mCoinCode;
-        briefFragment.langCode = mLanguage;
-        briefFragment.briefUrl = briefUrl;
-        dealFragment.coinCode = mCoinCode;
-        //将fragment装进列表中
-        List<Fragment> list_fragment = new ArrayList<>();
-        list_fragment.add(depthFragment);
-        list_fragment.add(dealFragment);
-        list_fragment.add(briefFragment);
-        //将名称加载tab名字列表，正常情况下，我们应该在values/arrays.xml中进行定义然后调用
-        ArrayList<String> list_title = new ArrayList<>();
-        list_title.add(getResources().getString(R.string.order));
-        list_title.add(getResources().getString(R.string.deal));
-        list_title.add(getResources().getString(R.string.brief));
+    private void postRun(){
+        new Handler().post(() -> {
+            timePanel = new TimePanel(KLineChartActivity.this, kLineChartView) {
+                @Override
+                protected View getDepthMapView() {
+                    return depth_view;
+                }
 
-        //为TabLayout添加tab名称
-        tab_layout.setTabMode(TabLayout.MODE_FIXED);
+                @Override
+                protected View getDepthTopView() {
+                    return depth_top_view;
+                }
+            }.act();
+            topPanel = new TopPanel(KLineChartActivity.this, kLineChartView).act();
 
-        //为TabLayout添加tab名称
-        tab_layout.addTab(tab_layout.newTab().setText(list_title.get(0)));
-        tab_layout.addTab(tab_layout.newTab().setText(list_title.get(1)));
-        FragmentPagerAdapter mAdapter = new FragmentPagerAdapter(getSupportFragmentManager()) {
-            @Override
-            public Fragment getItem(int position) {
-                return list_fragment.get(position);
+            findViewById(R.id.btn_back).setOnClickListener(o -> {
+                finish();
+            });
+
+            dealFragment = DealFragment.getInstance();
+            briefFragment = BriefFragment.getInstance();
+            depthFragment = DepthFragment.getInstance();
+            briefFragment.coinCode = mCoinCode;
+            briefFragment.langCode = mLanguage;
+            briefFragment.briefUrl = briefUrl;
+            dealFragment.coinCode = mCoinCode;
+            //将fragment装进列表中
+            List<Fragment> list_fragment = new ArrayList<>();
+            list_fragment.add(depthFragment);
+            list_fragment.add(dealFragment);
+            list_fragment.add(briefFragment);
+            //将名称加载tab名字列表，正常情况下，我们应该在values/arrays.xml中进行定义然后调用
+            ArrayList<String> list_title = new ArrayList<>();
+            list_title.add(getResources().getString(R.string.order));
+            list_title.add(getResources().getString(R.string.deal));
+            list_title.add(getResources().getString(R.string.brief));
+
+            //为TabLayout添加tab名称
+            tab_layout.setTabMode(TabLayout.MODE_FIXED);
+
+            //为TabLayout添加tab名称
+            tab_layout.addTab(tab_layout.newTab().setText(list_title.get(0)));
+            tab_layout.addTab(tab_layout.newTab().setText(list_title.get(1)));
+            FragmentPagerAdapter mAdapter = new FragmentPagerAdapter(getSupportFragmentManager()) {
+                @Override
+                public Fragment getItem(int position) {
+                    return list_fragment.get(position);
+                }
+
+                @Override
+                public int getCount() {
+                    return list_title.size();
+                }
+
+                @Override
+                public CharSequence getPageTitle(int position) {
+                    return list_title.get(position % list_title.size());
+                }
+            };
+
+            tab_View.setOffscreenPageLimit(3);
+            tab_View.setAdapter(mAdapter);
+            tab_layout.setupWithViewPager(tab_View);
+
+            kLineChartView.justShowLoading();
+            if (TextUtils.isEmpty(webSocketUrl)) {
+                new Thread(() -> {
+                    List<KLineEntity> data = LocalTestData.getALL(KLineChartActivity.this);
+                    DataHelper.calculate(data);
+                    runOnUiThread(() -> {
+                        adapter.addFooterData(data);
+                        adapter.notifyDataSetChanged();
+                        kLineChartView.startAnimation();
+                        kLineChartView.refreshEnd();
+                    });
+                }).start();
+            } else {
+                WebSocketService.getInstance().register(KLineChartActivity.this);
+                WebSocketService.getInstance().connect(webSocketUrl, mCoinCode);
             }
 
-            @Override
-            public int getCount() {
-                return list_title.size();
-            }
-
-            @Override
-            public CharSequence getPageTitle(int position) {
-                return list_title.get(position % list_title.size());
-            }
-        };
-
-        tab_View.setOffscreenPageLimit(3);
-        tab_View.setAdapter(mAdapter);
-        tab_layout.setupWithViewPager(tab_View);
-
-        kLineChartView.justShowLoading();
-        if (TextUtils.isEmpty(webSocketUrl)) {
-            new Thread(() -> {
-                List<KLineEntity> data = LocalTestData.getALL(KLineChartActivity.this);
-                DataHelper.calculate(data);
-                runOnUiThread(() -> {
-                    adapter.addFooterData(data);
-                    adapter.notifyDataSetChanged();
-                    kLineChartView.startAnimation();
-                    kLineChartView.refreshEnd();
-                });
-            }).start();
-        } else {
-            WebSocketService.getInstance().register(this);
-            WebSocketService.getInstance().connect(webSocketUrl, mCoinCode);
-        }
-
+        }) ;
     }
 
     private TextView tv_coin_title;
@@ -267,55 +286,11 @@ public class KLineChartActivity extends AppCompatActivity implements WebSocketSe
     }
 
     @Override
-    public void onDepthChange(JSONArray asksArray, JSONArray bidsArray) {
+    public void onDepthChange(List<DepthDataBean> buyList, List<DepthDataBean> sellList) {
         runOnUiThread(() -> {
-            newDepth(asksArray, bidsArray);
+            depth_view.setData(buyList, sellList);
+            depthFragment.onRecordChange(buyList, sellList);
         });
     }
 
-
-    public void newDepth(JSONArray asksList, JSONArray bidsList) {
-        ArrayList<DepthDataBean> buyList = new ArrayList<>();
-        ArrayList<DepthDataBean> sellList = new ArrayList<>();
-        String price;
-        String volume;
-        try {
-            if (asksList != null) {
-                for (int i = 0; i < asksList.length(); i++) {
-                    DepthDataBean depthDataBean = new DepthDataBean();
-                    price = String.valueOf(asksList.getJSONArray(i).get(0));
-                    volume = String.valueOf(asksList.getJSONArray(i).get(1));
-                    depthDataBean.setVolume(Float.valueOf(volume));
-                    depthDataBean.setPrice(Float.valueOf(price));
-
-                    sellList.add(depthDataBean);
-                }
-            } else {
-                DepthDataBean depthDataBean = new DepthDataBean();
-                depthDataBean.setVolume(0);
-                depthDataBean.setPrice(0);
-                sellList.add(depthDataBean);
-            }
-            if (bidsList != null) {
-                for (int i = 0; i < bidsList.length(); i++) {
-                    DepthDataBean depthDataBean = new DepthDataBean();
-                    price = String.valueOf(bidsList.getJSONArray(i).get(0));
-                    volume = String.valueOf(bidsList.getJSONArray(i).get(1));
-                    depthDataBean.setVolume(Float.valueOf(volume));
-                    depthDataBean.setPrice(Float.valueOf(price));
-
-                    buyList.add(0, depthDataBean);
-                }
-            } else {
-                DepthDataBean depthDataBean = new DepthDataBean();
-                depthDataBean.setVolume(0);
-                depthDataBean.setPrice(0);
-                buyList.add(depthDataBean);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        depth_view.setData(buyList, sellList);
-        depthFragment.onRecordChange(buyList, sellList);
-    }
 }

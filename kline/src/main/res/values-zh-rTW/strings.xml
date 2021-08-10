@@ -41,6 +41,6 @@
     <string name="block_query">區塊查詢</string>
     <string name="coin_brief">幣種簡介</string>
     <string name="order">委托掛單</string>
-    <string name="order_buy">买盘</string>
-    <string name="order_sell">卖盘</string>
+    <string name="order_buy">買盤</string>
+    <string name="order_sell">賣盤</string>
 </resources>

@@ -17,7 +17,7 @@ import com.season.example.net.WebSocketService;
 import com.season.mylibrary.R;
 
 
-public class TimePanel {
+public abstract class TimePanel {
 
     final int[] textIdsPop = {R.id.tv_text_fen0, R.id.tv_text_fen1, R.id.tv_text_fen5, R.id.tv_text_fen30, R.id.tv_text_week};
     final String[] intervalsPop = {"-1", "1", "5", "30", "1W"};
@@ -26,23 +26,20 @@ public class TimePanel {
     final String[] intervals = {"15", "60", "240", "1D"};
 
     private final KLineChartView kLineChartView;
-    private final DepthMapView depthMapView;
     private final Activity context;
 
-    public TimePanel(Activity context, KLineChartView kLineChartView, DepthMapView depthMapView) {
+    public TimePanel(Activity context, KLineChartView kLineChartView) {
         this.context = context;
         this.kLineChartView = kLineChartView;
-        this.depthMapView = depthMapView;
     }
 
 
     public String currentTimeSwitch = "-10086";//当前显示的分时类型   默认1分钟
     public void timeSwitch(String interval) {
-        if (currentTimeSwitch == interval) {
-            return;
+        if (currentTimeSwitch != interval) {
+            currentTimeSwitch = interval;
+            WebSocketService.getInstance().req(interval);
         }
-        currentTimeSwitch = interval;
-        WebSocketService.getInstance().req(interval);
         resetView(interval);
     }
 
@@ -101,7 +98,8 @@ public class TimePanel {
             int finalI = i;
             textView.setOnClickListener(v -> {
                 switchTimePop(false);
-                depthMapView.setVisibility(View.GONE);
+                getDepthMapView().setVisibility(View.GONE);
+                getDepthTopView().setVisibility(View.GONE);
                 ValueAnimator animator = ValueAnimator.ofInt(((LinearLayout.LayoutParams) k_line.getLayoutParams()).leftMargin, 4 * itemWidth + itemWidth / 4);
                 animator.addUpdateListener(animator1 -> {
                     LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) k_line.getLayoutParams();
@@ -337,7 +335,8 @@ public class TimePanel {
             textView.setOnClickListener(v -> {
                 switchTimePop(false);
                 switchIndexPop(false);
-                depthMapView.setVisibility(View.GONE);
+                getDepthMapView().setVisibility(View.GONE);
+                getDepthTopView().setVisibility(View.GONE);
                 ValueAnimator animator = ValueAnimator.ofInt(((LinearLayout.LayoutParams) k_line.getLayoutParams()).leftMargin, finalI * itemWidth + itemWidth / 4);
                 animator.addUpdateListener(animator1 -> {
                     LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) k_line.getLayoutParams();
@@ -359,10 +358,11 @@ public class TimePanel {
         });
         k_depth.setOnClickListener(o -> // 分时K线：点击更多
         {
-            if (depthMapView.getVisibility() == View.VISIBLE){
+            if (getDepthMapView().getVisibility() == View.VISIBLE){
                 return;
             }
-            depthMapView.setVisibility(View.VISIBLE);
+            getDepthMapView().setVisibility(View.VISIBLE);
+            getDepthTopView().setVisibility(View.VISIBLE);
             resetView("depth");
             ValueAnimator animator = ValueAnimator.ofInt(((LinearLayout.LayoutParams) k_line.getLayoutParams()).leftMargin, 5 * itemWidth + itemWidth / 4);
             animator.addUpdateListener(animator1 -> {
@@ -387,4 +387,7 @@ public class TimePanel {
         });
         return this;
     }
+
+    protected abstract View getDepthMapView();
+    protected abstract View getDepthTopView();
 }

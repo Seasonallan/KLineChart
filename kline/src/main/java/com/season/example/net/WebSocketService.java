@@ -6,6 +6,7 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import com.season.klinechart.DepthDataBean;
 import com.season.klinechart.KLineEntity;
 import com.season.example.fragment.DealRecord;
 
@@ -245,7 +246,48 @@ public class WebSocketService {
                         JSONObject deepObject = jsonObject.getJSONObject("deep");
                         JSONArray asksArray = deepObject.getJSONArray("asks");
                         JSONArray bidsArray = deepObject.getJSONArray("bids");
-                        notifyDepthValue(asksArray, bidsArray);
+                        ArrayList<DepthDataBean> buyList = new ArrayList<>();
+                        ArrayList<DepthDataBean> sellList = new ArrayList<>();
+                        String price;
+                        String volume;
+                        try {
+                            if (asksArray != null) {
+                                for (int i = 0; i < asksArray.length(); i++) {
+                                    DepthDataBean depthDataBean = new DepthDataBean();
+                                    price = String.valueOf(asksArray.getJSONArray(i).get(0));
+                                    volume = String.valueOf(asksArray.getJSONArray(i).get(1));
+                                    depthDataBean.setVolume(Float.valueOf(volume));
+                                    depthDataBean.setPrice(Float.valueOf(price));
+
+                                    sellList.add(depthDataBean);
+                                }
+                            } else {
+                                DepthDataBean depthDataBean = new DepthDataBean();
+                                depthDataBean.setVolume(0);
+                                depthDataBean.setPrice(0);
+                                sellList.add(depthDataBean);
+                            }
+                            if (bidsArray != null) {
+                                for (int i = 0; i < bidsArray.length(); i++) {
+                                    DepthDataBean depthDataBean = new DepthDataBean();
+                                    price = String.valueOf(bidsArray.getJSONArray(i).get(0));
+                                    volume = String.valueOf(bidsArray.getJSONArray(i).get(1));
+                                    depthDataBean.setVolume(Float.valueOf(volume));
+                                    depthDataBean.setPrice(Float.valueOf(price));
+
+                                    buyList.add(0, depthDataBean);
+                                }
+                            } else {
+                                DepthDataBean depthDataBean = new DepthDataBean();
+                                depthDataBean.setVolume(0);
+                                depthDataBean.setPrice(0);
+                                buyList.add(depthDataBean);
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                        if (buyList.size() > 0 || sellList.size() > 0)
+                            notifyDepthValue(buyList, sellList);
                     }
                 }
             } catch (JSONException e) {
@@ -303,9 +345,9 @@ public class WebSocketService {
         }
     }
 
-    private void notifyDepthValue(JSONArray asksArray, JSONArray bidsArray) {
+    private void notifyDepthValue(List<DepthDataBean> buyList, List<DepthDataBean> sellList) {
         if (messageResponseListener != null) {
-            messageResponseListener.onDepthChange(asksArray, bidsArray);
+            messageResponseListener.onDepthChange(buyList, sellList);
         }
     }
 
@@ -334,7 +376,7 @@ public class WebSocketService {
         void onSubscribe(boolean update, KLineEntity data);
         void onSocketConnected(int index);
         void onTradeChange(List<DealRecord> list);
-        void onDepthChange(JSONArray asksArray, JSONArray bidsArray);
+        void onDepthChange(List<DepthDataBean> buyList, List<DepthDataBean> sellList);
     }
 
     /**

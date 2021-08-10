@@ -41,6 +41,6 @@
     <string name="block_query">クエリをブロックする</string>
     <string name="coin_brief">通貨の紹介</string>
     <string name="order">伝票を切る</string>
-    <string name="order_buy">买盘</string>
-    <string name="order_sell">卖盘</string>
+    <string name="order_buy">買い取り相場</string>
+    <string name="order_sell">売り相場</string>
 </resources>

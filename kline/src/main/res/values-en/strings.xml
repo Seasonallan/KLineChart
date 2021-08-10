@@ -41,6 +41,6 @@
     <string name="block_query">Block query</string>
     <string name="coin_brief">Introduction to currency</string>
     <string name="order">Order</string>
-    <string name="order_buy">买盘</string>
-    <string name="order_sell">卖盘</string>
+    <string name="order_buy">Bid</string>
+    <string name="order_sell">Sell</string>
 </resources>
