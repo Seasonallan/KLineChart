@@ -14,10 +14,8 @@
 
     <color name="chart_red">#D04861</color>
     <color name="chart_green">#01AF8B</color>
-    <color name="chart_red_alpha">#44D04861</color>
-    <color name="chart_green_alpha">#4401AF8B</color>
-    <color name="chart_red_alpha2">#2E2227</color>
-    <color name="chart_green_alpha2">#0F3031</color>
+    <color name="chart_red_alpha">#22D04861</color>
+    <color name="chart_green_alpha">#2201AF8B</color>
     <color name="chart_line">#0178FF</color>
     <color name="chart_line_background">#1a1e82d2</color>
 

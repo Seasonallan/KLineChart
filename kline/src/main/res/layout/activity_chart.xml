@@ -51,6 +51,7 @@
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
+        android:layout_above="@+id/bottom_layout"
         android:layout_below="@+id/toolbar_layout"
         android:layout_height="match_parent">
 
@@ -180,6 +181,7 @@
 
 
     <LinearLayout
+        android:id="@+id/bottom_layout"
         android:layout_width="match_parent"
         android:layout_height="54dp"
         android:background="@color/chart_background"

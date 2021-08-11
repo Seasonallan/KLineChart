@@ -45,6 +45,7 @@ public class DepthFragment extends Fragment {
 
         recycler_view = parent.findViewById(R.id.recycler_view);
 
+        recycler_view.getRecycledViewPool().setMaxRecycledViews(1, 20);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recycler_view.setLayoutManager(linearLayoutManager);
 
@@ -114,6 +115,7 @@ public class DepthFragment extends Fragment {
             holder.price_buy_list.setTextColor(context.getResources().getColor(ColorStrategy.getStrategy().getRiseColor()));
             holder.price_sell_list.setTextColor(context.getResources().getColor(ColorStrategy.getStrategy().getFallColor()));
             int realPosition = position - 1;
+            float percentBuy = 0, percentSell = 0;
             if (buyData.size() > realPosition) {
                 DepthDataBean item = buyData.get(realPosition);
                 if (item.getPrice() == -1) {
@@ -124,6 +126,7 @@ public class DepthFragment extends Fragment {
                     holder.index_buy_list.setText(position + "");
                     holder.number_buy_list.setText(dfCoinNumber.format(item.getVolume()));
                     holder.price_buy_list.setText(dfCoinPrice.format(item.getPrice()));
+                    percentBuy = item.getVolume()/buyData.get(buyData.size() - 1).getVolume();
                 }
             } else {
                 holder.index_buy_list.setText("");
@@ -141,12 +144,14 @@ public class DepthFragment extends Fragment {
                     holder.index_sell_list.setText(position + "");
                     holder.number_sell_list.setText(dfCoinNumber.format(item.getVolume()));
                     holder.price_sell_list.setText(dfCoinPrice.format(item.getPrice()));
+                    percentSell = item.getVolume()/sellData.get(sellData.size() - 1).getVolume();
                 }
             } else {
                 holder.price_sell_list.setText("");
                 holder.number_sell_list.setText("");
                 holder.index_sell_list.setText("");
             }
+            holder.progressView.setProgress(percentBuy, percentSell);
         }
 
         @Override
@@ -157,9 +162,10 @@ public class DepthFragment extends Fragment {
 
         class DealHolder extends RecyclerView.ViewHolder {
             public TextView index_buy_list, number_buy_list, price_buy_list, price_sell_list, number_sell_list, index_sell_list;
-
+            public ProgressView progressView;
             public DealHolder(@NonNull View itemView) {
                 super(itemView);
+                progressView = itemView.findViewById(R.id.progress_color);
                 index_buy_list = itemView.findViewById(R.id.index_buy_list);
                 number_buy_list = itemView.findViewById(R.id.number_buy_list);
                 price_buy_list = itemView.findViewById(R.id.price_buy_list);

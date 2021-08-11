@@ -52,6 +52,7 @@
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_above="@+id/bottom_layout"
         android:layout_below="@+id/toolbar_layout">
 
         <com.google.android.material.appbar.AppBarLayout
@@ -182,12 +183,13 @@
 
 
     <LinearLayout
+        android:id="@+id/bottom_layout"
         android:layout_width="match_parent"
         android:layout_height="54dp"
-        android:background="@color/chart_white"
-        android:orientation="horizontal"
         android:layout_alignParentBottom="true"
+        android:background="@color/chart_white"
         android:gravity="center"
+        android:orientation="horizontal"
         android:padding="6dp">
 
         <Button
