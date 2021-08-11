@@ -20,7 +20,7 @@ import com.google.android.material.tabs.TabLayout;
 import com.season.example.fragment.BriefFragment;
 import com.season.example.fragment.DealFragment;
 import com.season.example.fragment.DealRecord;
-import com.season.example.fragment.DepthFragment;
+import com.season.example.fragment.OrderFragment;
 import com.season.example.net.BeanPrice;
 import com.season.example.net.LocalTestData;
 import com.season.example.net.WebSocketService;
@@ -48,7 +48,7 @@ public class KLineChartActivity extends AppCompatActivity implements WebSocketSe
 
     DealFragment dealFragment;
     BriefFragment briefFragment;
-    DepthFragment depthFragment;
+    OrderFragment orderFragment;
 
     String mCoinCode = "ETH_USDT";
     String mLanguage = "zh_CN";
@@ -187,14 +187,14 @@ public class KLineChartActivity extends AppCompatActivity implements WebSocketSe
 
             dealFragment = DealFragment.getInstance();
             briefFragment = BriefFragment.getInstance();
-            depthFragment = DepthFragment.getInstance();
+            orderFragment = OrderFragment.getInstance();
             briefFragment.coinCode = mCoinCode;
             briefFragment.langCode = mLanguage;
             briefFragment.briefUrl = briefUrl;
             dealFragment.coinCode = mCoinCode;
             //将fragment装进列表中
             List<Fragment> list_fragment = new ArrayList<>();
-            list_fragment.add(depthFragment);
+            list_fragment.add(orderFragment);
             list_fragment.add(dealFragment);
             list_fragment.add(briefFragment);
             //将名称加载tab名字列表，正常情况下，我们应该在values/arrays.xml中进行定义然后调用
@@ -325,7 +325,7 @@ public class KLineChartActivity extends AppCompatActivity implements WebSocketSe
     public void onDepthChange(List<DepthDataBean> buyList, List<DepthDataBean> sellList) {
         runOnUiThread(() -> {
             depth_view.setData(buyList, sellList);
-            depthFragment.onRecordChange(buyList, sellList);
+            orderFragment.onRecordChange(buyList, sellList);
         });
     }
 

@@ -22,7 +22,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DepthFragment extends Fragment {
+public class OrderFragment extends Fragment {
 
     RecyclerView recycler_view;
 
@@ -31,9 +31,9 @@ public class DepthFragment extends Fragment {
     private DealRecordAdapter myAdapter;
 
 
-    public static DepthFragment getInstance() {
+    public static OrderFragment getInstance() {
         Bundle args = new Bundle();
-        DepthFragment fragment = new DepthFragment();
+        OrderFragment fragment = new OrderFragment();
         fragment.setArguments(args);
         return fragment;
     }
@@ -74,6 +74,14 @@ public class DepthFragment extends Fragment {
         sellItems.clear();
         sellItems.addAll(sellData);
 
+        float maxVol = 1;
+        if (buyItems.size() > 0){
+            maxVol = buyItems.get(buyItems.size() - 1).getVolume();
+        }
+        if (sellData.size() > 0){
+            maxVol = Math.max(maxVol, sellData.get(sellData.size() - 1).getVolume());
+        }
+        myAdapter.resetMaxVol(maxVol);
         myAdapter.notifyDataSetChanged();
     }
 
@@ -85,12 +93,17 @@ public class DepthFragment extends Fragment {
         private DecimalFormat dfCoinNumber;//币种数量小数位限制
         private DecimalFormat dfCoinPrice;//币种价格小数位限制
 
+        private float maxVol = 1;
         DealRecordAdapter(Context context, List<DepthDataBean> buyData, List<DepthDataBean> sellData) {
             this.buyData = buyData;
             this.sellData = sellData;
             this.context = context;
             this.dfCoinPrice = new DecimalFormat(CoinCodeDecimalUtil.getDecimalFormatPrice(coinCode));//币种价格小数位限制
             this.dfCoinNumber = new DecimalFormat(CoinCodeDecimalUtil.getDecimalFormatNumber(coinCode));//币种数量小数位限制
+        }
+
+        public void resetMaxVol(float value){
+            maxVol = value;
         }
 
         @Override
@@ -124,9 +137,13 @@ public class DepthFragment extends Fragment {
                     holder.price_buy_list.setText("");
                 } else {
                     holder.index_buy_list.setText(position + "");
-                    holder.number_buy_list.setText(dfCoinNumber.format(item.getVolume()));
                     holder.price_buy_list.setText(dfCoinPrice.format(item.getPrice()));
-                    percentBuy = item.getVolume()/buyData.get(buyData.size() - 1).getVolume();
+                    if (realPosition > 0){
+                        holder.number_buy_list.setText(dfCoinNumber.format(item.getVolume() - buyData.get(realPosition - 1).getVolume()));
+                    }else{
+                        holder.number_buy_list.setText(dfCoinNumber.format(item.getVolume()));
+                    }
+                    percentBuy = item.getVolume()/maxVol;
                 }
             } else {
                 holder.index_buy_list.setText("");
@@ -144,7 +161,12 @@ public class DepthFragment extends Fragment {
                     holder.index_sell_list.setText(position + "");
                     holder.number_sell_list.setText(dfCoinNumber.format(item.getVolume()));
                     holder.price_sell_list.setText(dfCoinPrice.format(item.getPrice()));
-                    percentSell = item.getVolume()/sellData.get(sellData.size() - 1).getVolume();
+                    if (realPosition > 0){
+                        holder.number_sell_list.setText(dfCoinNumber.format(item.getVolume() - sellData.get(realPosition - 1).getVolume()));
+                    }else{
+                        holder.number_sell_list.setText(dfCoinNumber.format(item.getVolume()));
+                    }
+                    percentSell = item.getVolume()/maxVol;
                 }
             } else {
                 holder.price_sell_list.setText("");
