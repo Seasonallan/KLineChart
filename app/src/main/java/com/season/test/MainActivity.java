@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -62,15 +63,10 @@ public class MainActivity extends AppCompatActivity {
             String backType = data.getStringExtra("backType");
             switch (backType) {
                 case "买入":
-//                    this.result.success("1");
-                    Log.e("TAG", "1");
+                    Toast.makeText(MainActivity.this, "买入回调", Toast.LENGTH_SHORT).show();
                     break;
                 case "卖出":
-//                    this.result.success("2");
-                    Log.e("TAG", "2");
-                    break;
-                default:
-                    Log.e("TAG", "0");
+                    Toast.makeText(MainActivity.this, "卖出回调", Toast.LENGTH_SHORT).show();
                     break;
             }
         }

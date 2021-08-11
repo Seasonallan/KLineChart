@@ -1,5 +1,6 @@
 package com.season.example;
 
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -7,6 +8,7 @@ import android.os.Handler;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -127,6 +129,24 @@ public class KLineChartActivity extends AppCompatActivity implements WebSocketSe
         fallView = findViewById(R.id.depth_top_fall);
         riseView.setBackgroundResource(ColorStrategy.getStrategy().isRiseGreen() ? R.drawable.chart_circle_green : R.drawable.chart_circle_red);
         fallView.setBackgroundResource(!ColorStrategy.getStrategy().isRiseGreen() ? R.drawable.chart_circle_green : R.drawable.chart_circle_red);
+
+        Button buyButton = findViewById(R.id.bottom_buy);
+        Button sellButton =findViewById(R.id.bottom_sell);
+        buyButton.setBackgroundColor(getResources().getColor(ColorStrategy.getStrategy().getRiseColor()));
+        sellButton.setBackgroundColor(getResources().getColor(ColorStrategy.getStrategy().getFallColor()));
+        buyButton.setOnClickListener(v -> {
+            Intent intent = getIntent();
+            intent.putExtra("backType", "买入");
+            setResult(RESULT_OK, intent);
+            finish();
+        });
+        sellButton.setOnClickListener(v -> {
+            Intent intent = getIntent();
+            intent.putExtra("backType", "卖出");
+            setResult(RESULT_OK, intent);
+
+            finish();
+        });
 
         kLineChartView = findViewById(R.id.kLineChartView);
         adapter = new KLineChartAdapter();
