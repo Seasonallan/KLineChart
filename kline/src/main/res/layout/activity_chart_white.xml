@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/chart_background_light"
+    android:background="@color/white"
     android:orientation="vertical">
 
     <RelativeLayout
@@ -16,7 +16,7 @@
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:padding="16dp"
-            android:src="@mipmap/ic_arrow_white_white" />
+            android:src="@mipmap/ic_arrow_white_back" />
 
         <TextView
             android:id="@+id/toolbarTitle"
@@ -26,7 +26,7 @@
             android:layout_toRightOf="@+id/btn_back"
             android:singleLine="true"
             android:text="BTC/USDT"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:textSize="18sp"
             android:textStyle="bold" />
 
@@ -68,14 +68,16 @@
                     android:id="@+id/kLineChartView"
                     android:layout_width="match_parent"
                     android:layout_height="520dp"
-                    android:layout_below="@+id/timePanel" />
+                    android:layout_below="@+id/timePanel"
+                    app:kc_background_color="@color/white" />
 
                 <com.season.klinechart.DepthMapView
                     android:id="@+id/depth_view"
                     android:layout_width="match_parent"
                     android:layout_height="520dp"
                     android:layout_below="@+id/timePanel"
-                    android:visibility="gone" />
+                    android:visibility="gone"
+                    app:background_color="@color/white" />
 
                 <LinearLayout
                     android:id="@+id/depth_top"
@@ -83,10 +85,10 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/timePanel"
                     android:layout_centerHorizontal="true"
-                    android:visibility="gone"
                     android:layout_marginTop="16dp"
                     android:gravity="center"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:visibility="gone">
 
                     <View
                         android:id="@+id/depth_top_rise"
@@ -121,7 +123,7 @@
 
                 <include
                     android:id="@+id/indexPanelExtra"
-                    layout="@layout/kc_index_popup"
+                    layout="@layout/kc_index_popup_white"
                     android:layout_width="match_parent"
                     android:layout_height="520dp"
                     android:layout_below="@+id/timePanel"
@@ -129,7 +131,7 @@
 
                 <include
                     android:id="@+id/timePanelExtra"
-                    layout="@layout/kc_time_popup"
+                    layout="@layout/kc_time_popup_white"
                     android:layout_width="match_parent"
                     android:layout_height="520dp"
                     android:layout_below="@+id/timePanel"
@@ -138,14 +140,14 @@
 
                 <include
                     android:id="@+id/timePanel"
-                    layout="@layout/kc_panel_time"
+                    layout="@layout/kc_panel_time_white"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/topPanel" />
 
                 <include
                     android:id="@+id/topPanel"
-                    layout="@layout/kc_panel_top"
+                    layout="@layout/kc_panel_top_white"
                     android:layout_width="match_parent"
                     android:layout_height="88dp" />
 
@@ -155,11 +157,11 @@
                 android:id="@+id/tab_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:tabBackground="@color/chart_background_light"
+                app:tabBackground="@color/white"
                 app:tabIndicatorColor="@color/chart_line"
-                app:tabTextAppearance="@style/TabLayoutTextStyle"
                 app:tabIndicatorHeight="2dp"
                 app:tabSelectedTextColor="@color/chart_line"
+                app:tabTextAppearance="@style/TabLayoutTextStyle"
                 app:tabTextColor="@color/chart_text" />
 
         </com.google.android.material.appbar.AppBarLayout>

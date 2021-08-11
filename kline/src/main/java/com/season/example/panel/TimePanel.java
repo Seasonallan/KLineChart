@@ -10,6 +10,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import com.season.klinechart.ColorStrategy;
 import com.season.klinechart.KLineChartView;
 import com.season.klinechart.draw.Status;
 import com.season.example.net.WebSocketService;
@@ -65,7 +66,7 @@ public abstract class TimePanel {
                 time_all.setTextColor(getResources().getColor(R.color.chart_line));
             } else {
                 textView.setTextColor(getResources().getColor(R.color.chart_text));
-                textView.setBackgroundResource(R.drawable.chart_btn_deep);
+                textView.setBackgroundResource(ColorStrategy.getStrategy().isBlackTheme()?R.drawable.chart_btn_deep:R.drawable.chart_btn_light);
             }
         }
         if ("depth".equals(interval)){
@@ -224,10 +225,18 @@ public abstract class TimePanel {
 
     private void resetMaBoll(int index) {
         maText.setTextColor(getResources().getColor(index == 0 ? R.color.chart_line : R.color.chart_text));
-        maText.setBackgroundResource(index == 0 ? R.drawable.chart_btn_deep_stroke : R.drawable.chart_btn_deep);
+        if (ColorStrategy.getStrategy().isBlackTheme()){
+            maText.setBackgroundResource(index == 0 ? R.drawable.chart_btn_deep_stroke : R.drawable.chart_btn_deep);
+        }else{
+            maText.setBackgroundResource(index == 0 ? R.drawable.chart_btn_deep_stroke : R.drawable.chart_btn_light);
+        }
 
         bollText.setTextColor(getResources().getColor(index == 1 ? R.color.chart_line : R.color.chart_text));
-        bollText.setBackgroundResource(index == 1 ? R.drawable.chart_btn_deep_stroke : R.drawable.chart_btn_deep);
+        if (ColorStrategy.getStrategy().isBlackTheme()){
+            bollText.setBackgroundResource(index == 1 ? R.drawable.chart_btn_deep_stroke : R.drawable.chart_btn_deep);
+        }else{
+            bollText.setBackgroundResource(index == 1 ? R.drawable.chart_btn_deep_stroke : R.drawable.chart_btn_light);
+        }
 
         if (index == 0) {
             kLineChartView.changeMainDrawType(Status.MA);

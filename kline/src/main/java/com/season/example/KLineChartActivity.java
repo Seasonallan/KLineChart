@@ -93,32 +93,40 @@ public class KLineChartActivity extends AppCompatActivity implements WebSocketSe
 
     DepthMapView depth_view;
     View depth_top_view, riseView, fallView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         Bundle bundle = getIntent().getBundleExtra("bundle");
+        boolean nightMode = true;
         if (bundle != null) {
             mCoinCode = bundle.getString("coinCode");
             mLanguage = bundle.getString("language");
             webSocketUrl = bundle.getString("webSocketUrl");
             briefUrl = bundle.getString("briefUrl");
             boolean color = bundle.getBoolean("riseGreen", true);
-            if (color){
+            if (color) {
                 ColorStrategy.getStrategy().setGreenRiseRedFall();
-            }else{
+            } else {
                 ColorStrategy.getStrategy().setRedRiseGreenFall();
+            }
+            nightMode = bundle.getBoolean("nightMode", true);
+            if (nightMode) {
+                ColorStrategy.getStrategy().setThemeBlack();
+            } else {
+                ColorStrategy.getStrategy().setThemeWhite();
             }
         }
         setLanguage(mLanguage);
-        setContentView(R.layout.activity_chart);
+        setContentView(nightMode ? R.layout.activity_chart : R.layout.activity_chart_white);
 
         depth_view = findViewById(R.id.depth_view);
         depth_top_view = findViewById(R.id.depth_top);
         riseView = findViewById(R.id.depth_top_rise);
         fallView = findViewById(R.id.depth_top_fall);
-        riseView.setBackgroundResource(ColorStrategy.getStrategy().isRiseGreen()?R.drawable.chart_circle_green :R.drawable.chart_circle_red);
-        fallView.setBackgroundResource(!ColorStrategy.getStrategy().isRiseGreen()?R.drawable.chart_circle_green :R.drawable.chart_circle_red);
+        riseView.setBackgroundResource(ColorStrategy.getStrategy().isRiseGreen() ? R.drawable.chart_circle_green : R.drawable.chart_circle_red);
+        fallView.setBackgroundResource(!ColorStrategy.getStrategy().isRiseGreen() ? R.drawable.chart_circle_green : R.drawable.chart_circle_red);
 
         kLineChartView = findViewById(R.id.kLineChartView);
         adapter = new KLineChartAdapter();
@@ -129,16 +137,16 @@ public class KLineChartActivity extends AppCompatActivity implements WebSocketSe
         kLineChartView.setAdapter(adapter);
 
 
-        tv_coin_title = findViewById(R.id.toolbarTitle);
-        tv_coin_title.setText(mCoinCode.replace("_", "/"));
-        tab_layout = findViewById(R.id.tab_layout);
-        tab_View = findViewById(R.id.tab_View);
+        tvCoinTitle = findViewById(R.id.toolbarTitle);
+        tvCoinTitle.setText(mCoinCode.replace("_", "/"));
+        tabLayout = findViewById(R.id.tab_layout);
+        viewPager = findViewById(R.id.tab_View);
 
         postRun();
 
     }
 
-    private void postRun(){
+    private void postRun() {
         new Handler().post(() -> {
             timePanel = new TimePanel(KLineChartActivity.this, kLineChartView) {
                 @Override
@@ -176,11 +184,11 @@ public class KLineChartActivity extends AppCompatActivity implements WebSocketSe
             list_title.add(getResources().getString(R.string.brief));
 
             //为TabLayout添加tab名称
-            tab_layout.setTabMode(TabLayout.MODE_FIXED);
+            tabLayout.setTabMode(TabLayout.MODE_FIXED);
 
             //为TabLayout添加tab名称
-            tab_layout.addTab(tab_layout.newTab().setText(list_title.get(0)));
-            tab_layout.addTab(tab_layout.newTab().setText(list_title.get(1)));
+            tabLayout.addTab(tabLayout.newTab().setText(list_title.get(0)));
+            tabLayout.addTab(tabLayout.newTab().setText(list_title.get(1)));
             FragmentPagerAdapter mAdapter = new FragmentPagerAdapter(getSupportFragmentManager()) {
                 @Override
                 public Fragment getItem(int position) {
@@ -198,9 +206,9 @@ public class KLineChartActivity extends AppCompatActivity implements WebSocketSe
                 }
             };
 
-            tab_View.setOffscreenPageLimit(3);
-            tab_View.setAdapter(mAdapter);
-            tab_layout.setupWithViewPager(tab_View);
+            viewPager.setOffscreenPageLimit(3);
+            viewPager.setAdapter(mAdapter);
+            tabLayout.setupWithViewPager(viewPager);
 
             kLineChartView.justShowLoading();
             if (TextUtils.isEmpty(webSocketUrl)) {
@@ -219,13 +227,13 @@ public class KLineChartActivity extends AppCompatActivity implements WebSocketSe
                 WebSocketService.getInstance().connect(webSocketUrl, mCoinCode);
             }
 
-        }) ;
+        });
     }
 
-    private TextView tv_coin_title;
+    private TextView tvCoinTitle;
 
-    private TabLayout tab_layout;
-    private ViewPager tab_View;
+    private TabLayout tabLayout;
+    private ViewPager viewPager;
 
     private TimePanel timePanel;
     private TopPanel topPanel;

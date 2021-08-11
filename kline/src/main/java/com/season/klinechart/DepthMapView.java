@@ -341,19 +341,20 @@ public class DepthMapView extends View {
         Paint.FontMetrics metrics = mTextPaint.getFontMetrics();
         float textHeight = metrics.descent - metrics.ascent;
 
+        int top = dp2px(64);
         int padding = dp2px(5);
-        canvas.drawRoundRect(new RectF(mDrawWidth - currentWidth / 2 - padding, 16,
-                        mDrawWidth + currentWidth / 2 + padding * 2, textHeight * 2 + padding * 2 + 16),
+        canvas.drawRoundRect(new RectF(mDrawWidth - currentWidth / 2 - padding, top,
+                        mDrawWidth + currentWidth / 2 + padding * 2, textHeight * 2 + padding * 2 + top),
                 10, 10, mSelectorBackgroundPaint);
-        canvas.drawRoundRect(new RectF(mDrawWidth - currentWidth / 2 - padding, 16,
-                        mDrawWidth + currentWidth / 2 + padding * 2, textHeight * 2 + padding * 2 + 16),
+        canvas.drawRoundRect(new RectF(mDrawWidth - currentWidth / 2 - padding, top,
+                        mDrawWidth + currentWidth / 2 + padding * 2, textHeight * 2 + padding * 2 + top),
                 10, 10, mSelectorBackgroundLinePaint);
         canvas.drawText(getContext().getString(R.string.number) + ": ",
-                mDrawWidth - currentWidth / 2 + padding + mTextPaint.measureText(getContext().getString(R.string.number)), textHeight + 2 + 16, mTextPaint);
-        canvas.drawText(getVolumeValue(mMapX.get(position).getVolume()), mDrawWidth + currentWidth / 2 + padding, textHeight + 2 + 16, mTextPaint);
+                mDrawWidth - currentWidth / 2 + padding + mTextPaint.measureText(getContext().getString(R.string.number)), textHeight + 2 + top, mTextPaint);
+        canvas.drawText(getVolumeValue(mMapX.get(position).getVolume()), mDrawWidth + currentWidth / 2 + padding, textHeight + 2 + top, mTextPaint);
         canvas.drawText(getContext().getString(R.string.price) + ": ",
-                mDrawWidth - currentWidth / 2 + padding + mTextPaint.measureText(getContext().getString(R.string.price)), textHeight * 2 + padding + 16, mTextPaint);
-        canvas.drawText(getValue(mMapX.get(position).getPrice()), mDrawWidth + currentWidth / 2 + padding, textHeight * 2 + padding + 16, mTextPaint);
+                mDrawWidth - currentWidth / 2 + padding + mTextPaint.measureText(getContext().getString(R.string.price)), textHeight * 2 + padding + top, mTextPaint);
+        canvas.drawText(getValue(mMapX.get(position).getPrice()), mDrawWidth + currentWidth / 2 + padding, textHeight * 2 + padding + top, mTextPaint);
     }
 
     private float getY(float volume) {

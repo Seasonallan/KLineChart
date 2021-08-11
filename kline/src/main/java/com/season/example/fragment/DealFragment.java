@@ -93,8 +93,9 @@ public class DealFragment extends Fragment {
 
         @Override
         public DealHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            View view = LayoutInflater.from(context).inflate(viewType == 0 ? R.layout.kc_item_deal_record0 :
-                    R.layout.kc_item_deal_record, parent, false);
+            View view = LayoutInflater.from(context).inflate(ColorStrategy.getStrategy().isBlackTheme()?(viewType == 0 ? R.layout.kc_item_deal_record0 :
+                    R.layout.kc_item_deal_record):(viewType == 0 ? R.layout.kc_item_deal_record0_white :
+                    R.layout.kc_item_deal_record_white), parent, false);
             DealHolder holder = new DealHolder(view);
             return holder;
         }

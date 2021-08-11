@@ -18,20 +18,49 @@ public class ColorStrategy {
     }
 
     /**
+     * 设置为 夜间模式
+     */
+    public void setThemeBlack() {
+        isBlackTheme = true;
+    }
+
+    /**
+     * 设置 白天模式
+     */
+    public void setThemeWhite() {
+        isBlackTheme = false;
+    }
+
+    /**
+     * 是否是夜间模式
+     * @return
+     */
+    public boolean isBlackTheme(){
+        return isBlackTheme;
+    }
+    private boolean isBlackTheme = true;
+
+    public int getBackgroundColor() {
+        return isBlackTheme ? R.color.chart_background_light : R.color.white;
+    }
+
+    /**
      * 红涨绿跌
      */
-    public void setRedRiseGreenFall(){
+    public void setRedRiseGreenFall() {
         isRiseGreen = false;
     }
+
     /**
      * 绿涨红跌
      */
-    public void setGreenRiseRedFall(){
+    public void setGreenRiseRedFall() {
         isRiseGreen = true;
     }
 
     boolean isRiseGreen = true;
-    public boolean isRiseGreen(){
+
+    public boolean isRiseGreen() {
         return isRiseGreen;
     }
 

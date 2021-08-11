@@ -16,6 +16,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.season.example.net.SimpleRequest;
+import com.season.klinechart.ColorStrategy;
 import com.season.mylibrary.R;
 
 import org.json.JSONObject;
@@ -52,7 +53,7 @@ public class BriefFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View parent = inflater.inflate(R.layout.kc_fragment_brief, null);
+        View parent = inflater.inflate(ColorStrategy.getStrategy().isBlackTheme()?R.layout.kc_fragment_brief:R.layout.kc_fragment_brief_white, null);
         initView(parent);
         new Thread(() -> {
             try {

@@ -16,6 +16,7 @@ import com.season.klinechart.ColorStrategy;
 
 public class MainActivity extends AppCompatActivity {
 
+    RadioGroup themeRadioGroup;
     RadioGroup envRadioGroup;
     RadioGroup colorRadioGroup;
     RadioGroup languageRadioGroup;
@@ -25,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        themeRadioGroup = findViewById(R.id.rg_theme);
         envRadioGroup = findViewById(R.id.rg_environment);
         colorRadioGroup = findViewById(R.id.rg_color);
         languageRadioGroup = findViewById(R.id.rg_language);
@@ -41,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
         bundle.putString("coinCode", view.getTag().toString());
         bundle.putString("language", findViewById(languageRadioGroup.getCheckedRadioButtonId()).getTag().toString());
         bundle.putBoolean("riseGreen", colorRadioGroup.getCheckedRadioButtonId() == R.id.rb_color1);
+        bundle.putBoolean("nightMode", themeRadioGroup.getCheckedRadioButtonId() == R.id.rb_theme1);
 
         bundle.putString("webSocketUrl", envRadioGroup.getCheckedRadioButtonId() == R.id.rb_environment1 ? Configure.socketUrl
                 : envRadioGroup.getCheckedRadioButtonId() == R.id.rb_environment2 ? Configure.socketUrlPre : Configure.socketUrlTest);

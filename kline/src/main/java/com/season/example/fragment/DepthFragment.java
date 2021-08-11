@@ -99,8 +99,9 @@ public class DepthFragment extends Fragment {
 
         @Override
         public DealRecordAdapter.DealHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            View view = LayoutInflater.from(context).inflate(viewType == 0 ? R.layout.kc_item_order_record0 :
-                    R.layout.kc_item_order_record, parent, false);
+            View view = LayoutInflater.from(context).inflate(ColorStrategy.getStrategy().isBlackTheme()?(viewType == 0 ? R.layout.kc_item_order_record0 :
+                    R.layout.kc_item_order_record):viewType == 0 ? R.layout.kc_item_order_record0_white :
+                    R.layout.kc_item_order_record_white, parent, false);
             DealRecordAdapter.DealHolder holder = new DealRecordAdapter.DealHolder(view);
             return holder;
         }
