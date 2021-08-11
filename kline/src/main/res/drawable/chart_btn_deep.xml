@@ -4,7 +4,7 @@
     <item android:state_pressed="false">
         <shape>
             <!-- 填充的颜色 -->
-            <solid android:color="@color/blue_btn"/>
+            <solid android:color="@color/chart_btn_deep"/>
 
             <!-- 设置按钮的四个角为弧形 -->
             <!-- android:radius 弧形的半径 -->

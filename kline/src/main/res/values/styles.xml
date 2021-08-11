@@ -10,7 +10,7 @@
         <item name="android:padding">6dp</item>
         <item name="android:button">@null</item>
         <item name="android:textColor">@color/tv_select_blue</item>
-        <item name="android:background">@drawable/btn_radio_deep</item>
+        <item name="android:background">@drawable/chart_radio_deep</item>
     </style>
 
 

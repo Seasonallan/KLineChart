@@ -10,7 +10,6 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
-import com.season.klinechart.DepthMapView;
 import com.season.klinechart.KLineChartView;
 import com.season.klinechart.draw.Status;
 import com.season.example.net.WebSocketService;
@@ -61,12 +60,12 @@ public abstract class TimePanel {
             TextView textView = timeView.findViewById(textIdsPop[i]);
             if (interval.equals(intervalsPop[i])) {
                 textView.setTextColor(getResources().getColor(R.color.chart_line));
-                textView.setBackgroundResource(R.drawable.btn_line_deep);
+                textView.setBackgroundResource(R.drawable.chart_btn_deep_stroke);
                 time_all.setText(textView.getText().toString());
                 time_all.setTextColor(getResources().getColor(R.color.chart_line));
             } else {
                 textView.setTextColor(getResources().getColor(R.color.chart_text));
-                textView.setBackgroundResource(R.drawable.btn_circle_deep);
+                textView.setBackgroundResource(R.drawable.chart_btn_deep);
             }
         }
         if ("depth".equals(interval)){
@@ -225,10 +224,10 @@ public abstract class TimePanel {
 
     private void resetMaBoll(int index) {
         maText.setTextColor(getResources().getColor(index == 0 ? R.color.chart_line : R.color.chart_text));
-        maText.setBackgroundResource(index == 0 ? R.drawable.btn_line_deep : R.drawable.btn_circle_deep);
+        maText.setBackgroundResource(index == 0 ? R.drawable.chart_btn_deep_stroke : R.drawable.chart_btn_deep);
 
         bollText.setTextColor(getResources().getColor(index == 1 ? R.color.chart_line : R.color.chart_text));
-        bollText.setBackgroundResource(index == 1 ? R.drawable.btn_line_deep : R.drawable.btn_circle_deep);
+        bollText.setBackgroundResource(index == 1 ? R.drawable.chart_btn_deep_stroke : R.drawable.chart_btn_deep);
 
         if (index == 0) {
             kLineChartView.changeMainDrawType(Status.MA);

@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <color name="color_background">#151C30</color>
+    <color name="chart_background_light">#151C30</color><!--全局背景色-->
+    <color name="chart_background">#0D1723</color> <!--K线图背景色-->
 
-    <color name="white">#FFFFFFFF</color>
+    <color name="white">#FFFFFF</color>
     <color name="transparent">#00000000</color>
 
     <color name="chart_dark">#131C2F</color>
     <color name="chart_black">#101724</color>
-    <color name="blue_btn">#182A43</color>
+    <color name="chart_btn_deep">#182A43</color>
 
-    <color name="blue_dark">#0D1723</color>
     <color name="chart_red">#D04861</color>
     <color name="chart_green">#01AF8B</color>
     <color name="chart_red_alpha">#2E2227</color>
@@ -23,7 +23,6 @@
     <color name="chart_ma30">#DA8AE5</color>
     <color name="chart_white">#CAD1EB</color>
 
-    <color name="chart_background">#0D1723</color> <!--背景色-->
     <color name="chart_point_bac">#EE131C2F</color> <!--选中时 矩形框背景色-->
     <color name="chart_grid_line">#1AFFFFFF</color>
     <color name="chart_text">#818596</color>

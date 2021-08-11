@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/color_background"
+    android:background="@color/chart_background_light"
     android:orientation="vertical">
 
     <LinearLayout
@@ -98,7 +98,7 @@
         android:id="@+id/k_line"
         android:layout_width="48dp"
         android:layout_height="2dp"
-        android:background="@drawable/circle_blue" />
+        android:background="@drawable/chart_line" />
 
     <View
         android:layout_width="match_parent"

@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -34,8 +33,6 @@ import com.season.klinechart.KLineChartView;
 import com.season.klinechart.KLineEntity;
 import com.season.klinechart.formatter.DateFormatter;
 import com.season.mylibrary.R;
-
-import org.json.JSONArray;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -120,8 +117,8 @@ public class KLineChartActivity extends AppCompatActivity implements WebSocketSe
         depth_top_view = findViewById(R.id.depth_top);
         riseView = findViewById(R.id.depth_top_rise);
         fallView = findViewById(R.id.depth_top_fall);
-        riseView.setBackgroundResource(ColorStrategy.getStrategy().isRiseGreen()?R.drawable.circle_green:R.drawable.circle_red);
-        fallView.setBackgroundResource(!ColorStrategy.getStrategy().isRiseGreen()?R.drawable.circle_green:R.drawable.circle_red);
+        riseView.setBackgroundResource(ColorStrategy.getStrategy().isRiseGreen()?R.drawable.chart_circle_green :R.drawable.chart_circle_red);
+        fallView.setBackgroundResource(!ColorStrategy.getStrategy().isRiseGreen()?R.drawable.chart_circle_green :R.drawable.chart_circle_red);
 
         kLineChartView = findViewById(R.id.kLineChartView);
         adapter = new KLineChartAdapter();
