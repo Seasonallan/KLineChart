@@ -162,6 +162,56 @@ public class KLineChartActivity extends AppCompatActivity implements WebSocketSe
         tabLayout = findViewById(R.id.tab_layout);
         viewPager = findViewById(R.id.tab_View);
 
+
+        findViewById(R.id.btn_back).setOnClickListener(o -> {
+            finish();
+        });
+
+        dealFragment = DealFragment.getInstance();
+        briefFragment = BriefFragment.getInstance();
+        orderFragment = OrderFragment.getInstance();
+        briefFragment.coinCode = mCoinCode;
+        briefFragment.langCode = mLanguage;
+        briefFragment.briefUrl = briefUrl;
+        dealFragment.coinCode = mCoinCode;
+        //将fragment装进列表中
+        List<Fragment> list_fragment = new ArrayList<>();
+        list_fragment.add(orderFragment);
+        list_fragment.add(dealFragment);
+        list_fragment.add(briefFragment);
+        //将名称加载tab名字列表，正常情况下，我们应该在values/arrays.xml中进行定义然后调用
+        ArrayList<String> list_title = new ArrayList<>();
+        list_title.add(getResources().getString(R.string.order));
+        list_title.add(getResources().getString(R.string.deal));
+        list_title.add(getResources().getString(R.string.brief));
+
+        //为TabLayout添加tab名称
+        tabLayout.setTabMode(TabLayout.MODE_FIXED);
+
+        //为TabLayout添加tab名称
+        tabLayout.addTab(tabLayout.newTab().setText(list_title.get(0)));
+        tabLayout.addTab(tabLayout.newTab().setText(list_title.get(1)));
+        FragmentPagerAdapter mAdapter = new FragmentPagerAdapter(getSupportFragmentManager()) {
+            @Override
+            public Fragment getItem(int position) {
+                return list_fragment.get(position);
+            }
+
+            @Override
+            public int getCount() {
+                return list_title.size();
+            }
+
+            @Override
+            public CharSequence getPageTitle(int position) {
+                return list_title.get(position % list_title.size());
+            }
+        };
+
+        viewPager.setOffscreenPageLimit(3);
+        viewPager.setAdapter(mAdapter);
+        tabLayout.setupWithViewPager(viewPager);
+
         postRun();
 
     }
@@ -180,55 +230,6 @@ public class KLineChartActivity extends AppCompatActivity implements WebSocketSe
                 }
             }.act();
             topPanel = new TopPanel(KLineChartActivity.this, kLineChartView).act();
-
-            findViewById(R.id.btn_back).setOnClickListener(o -> {
-                finish();
-            });
-
-            dealFragment = DealFragment.getInstance();
-            briefFragment = BriefFragment.getInstance();
-            orderFragment = OrderFragment.getInstance();
-            briefFragment.coinCode = mCoinCode;
-            briefFragment.langCode = mLanguage;
-            briefFragment.briefUrl = briefUrl;
-            dealFragment.coinCode = mCoinCode;
-            //将fragment装进列表中
-            List<Fragment> list_fragment = new ArrayList<>();
-            list_fragment.add(orderFragment);
-            list_fragment.add(dealFragment);
-            list_fragment.add(briefFragment);
-            //将名称加载tab名字列表，正常情况下，我们应该在values/arrays.xml中进行定义然后调用
-            ArrayList<String> list_title = new ArrayList<>();
-            list_title.add(getResources().getString(R.string.order));
-            list_title.add(getResources().getString(R.string.deal));
-            list_title.add(getResources().getString(R.string.brief));
-
-            //为TabLayout添加tab名称
-            tabLayout.setTabMode(TabLayout.MODE_FIXED);
-
-            //为TabLayout添加tab名称
-            tabLayout.addTab(tabLayout.newTab().setText(list_title.get(0)));
-            tabLayout.addTab(tabLayout.newTab().setText(list_title.get(1)));
-            FragmentPagerAdapter mAdapter = new FragmentPagerAdapter(getSupportFragmentManager()) {
-                @Override
-                public Fragment getItem(int position) {
-                    return list_fragment.get(position);
-                }
-
-                @Override
-                public int getCount() {
-                    return list_title.size();
-                }
-
-                @Override
-                public CharSequence getPageTitle(int position) {
-                    return list_title.get(position % list_title.size());
-                }
-            };
-
-            viewPager.setOffscreenPageLimit(3);
-            viewPager.setAdapter(mAdapter);
-            tabLayout.setupWithViewPager(viewPager);
 
             kLineChartView.justShowLoading();
             if (TextUtils.isEmpty(webSocketUrl)) {

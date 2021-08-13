@@ -5,7 +5,7 @@
     android:layout_height="88dp">
 
     <TextView
-        android:id="@+id/k_Price"
+        android:id="@+id/top_tv_price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingLeft="8dp"
@@ -16,10 +16,10 @@
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/approx"
+        android:id="@+id/top_tv_price_cn"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_below="@+id/k_Price"
+        android:layout_below="@+id/top_tv_price"
         android:gravity="bottom"
         android:paddingLeft="8dp"
         android:paddingBottom="8dp"
@@ -28,11 +28,11 @@
         android:textColor="@color/chart_text" />
 
     <TextView
-        android:id="@+id/apprise"
+        android:id="@+id/top_tv_percent"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_below="@+id/k_Price"
-        android:layout_toRightOf="@+id/approx"
+        android:layout_below="@+id/top_tv_price"
+        android:layout_toRightOf="@+id/top_tv_price_cn"
         android:gravity="bottom"
         android:paddingLeft="8dp"
         android:paddingBottom="8dp"
@@ -40,7 +40,7 @@
         android:textColor="@color/chart_green" />
 
     <LinearLayout
-        android:id="@+id/amountL"
+        android:id="@+id/top_ll_desc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -50,7 +50,7 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/app_zuigao"
+            android:id="@+id/top_tv_24max"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text=""
@@ -58,7 +58,7 @@
             android:textSize="11sp" />
 
         <TextView
-            android:id="@+id/app_zuidi"
+            android:id="@+id/top_tv_24min"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginVertical="5dp"
@@ -67,7 +67,7 @@
             android:textSize="11sp" />
 
         <TextView
-            android:id="@+id/app_liang"
+            android:id="@+id/top_tv_24vol"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text=""
@@ -80,11 +80,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:layout_marginRight="10dp"
-        android:layout_toLeftOf="@+id/amountL"
+        android:layout_toLeftOf="@+id/top_ll_desc"
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/text_zuigao"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/hour24_highest"
@@ -92,7 +91,6 @@
             android:textSize="11sp" />
 
         <TextView
-            android:id="@+id/text_zuidi"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginVertical="5dp"
@@ -101,7 +99,6 @@
             android:textSize="11sp" />
 
         <TextView
-            android:id="@+id/text_liang"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/hour24_amount"

@@ -21,20 +21,20 @@ public class TopPanel {
     }
 
 
-    private TextView k_Price;
-    private TextView approx;
-    private TextView apprise;
-    private TextView app_zuigao;
-    private TextView app_zuidi;
-    private TextView app_liang;
+    private TextView priceView;
+    private TextView priceCNView;
+    private TextView percentView;
+    private TextView max24View;
+    private TextView min24View;
+    private TextView vol24View;
 
     public TopPanel act() {
-        k_Price = findViewById(R.id.k_Price);
-        approx = findViewById(R.id.approx);
-        apprise = findViewById(R.id.apprise);
-        app_zuigao = findViewById(R.id.app_zuigao);
-        app_zuidi = findViewById(R.id.app_zuidi);
-        app_liang = findViewById(R.id.app_liang);
+        priceView = findViewById(R.id.top_tv_price);
+        priceCNView = findViewById(R.id.top_tv_price_cn);
+        percentView = findViewById(R.id.top_tv_percent);
+        max24View = findViewById(R.id.top_tv_24max);
+        min24View = findViewById(R.id.top_tv_24min);
+        vol24View = findViewById(R.id.top_tv_24vol);
         return this;
     }
 
@@ -44,29 +44,26 @@ public class TopPanel {
 
 
     public void onPriceChange(BeanPrice price) {
-        context.runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                k_Price.setText(getValueDot(price.currentExchangPrice));
-                app_zuigao.setText(getValueDot(price.maxPrice));
-                app_zuidi.setText(getValueDot(price.minPrice));
-                app_liang.setText(price.transactionSum);
-                approx.setText("≈" + getValueDot(price.getPriceRMB()) + " CNY");
-                double percent = price.getPercent();
-                if (percent >= 0){
-                    apprise.setText("+"+getValueDot(percent) + "%");
-                    k_Price.setTextColor(context.getResources().getColor(ColorStrategy.getStrategy().getRiseColor()));
-                    apprise.setTextColor(context.getResources().getColor(ColorStrategy.getStrategy().getRiseColor()));
-                }else{
-                    apprise.setText(getValueDot(percent) + "%");
-                    k_Price.setTextColor(context.getResources().getColor(ColorStrategy.getStrategy().getFallColor()));
-                    apprise.setTextColor(context.getResources().getColor(ColorStrategy.getStrategy().getFallColor()));
-                }
+        context.runOnUiThread(() -> {
+            priceView.setText(getValueDot(price.currentExchangPrice));
+            max24View.setText(getValueDot(price.maxPrice));
+            min24View.setText(getValueDot(price.minPrice));
+            vol24View.setText(price.transactionSum);
+            priceCNView.setText("≈" + getValueDot(price.getPriceRMB()) + " " + price.getCoinSymbol());
+            double percent = price.getPercent();
+            if (percent >= 0){
+                percentView.setText("+"+getValueDot(percent) + "%");
+                priceView.setTextColor(context.getResources().getColor(ColorStrategy.getStrategy().getRiseColor()));
+                percentView.setTextColor(context.getResources().getColor(ColorStrategy.getStrategy().getRiseColor()));
+            }else{
+                percentView.setText(getValueDot(percent) + "%");
+                priceView.setTextColor(context.getResources().getColor(ColorStrategy.getStrategy().getFallColor()));
+                percentView.setTextColor(context.getResources().getColor(ColorStrategy.getStrategy().getFallColor()));
             }
         });
     }
 
-    static DecimalFormat dfRMB = new DecimalFormat("#,#0.00");
+    static DecimalFormat dfRMB = new DecimalFormat("#,##0.00");
 
     public static String getValueDot(double value) {
         return dfRMB.format(value);

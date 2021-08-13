@@ -55,29 +55,35 @@ public class WebSocketService {
     String coinCodeUSDT = "USDT";
     String currentSubscribe = null;
     long timeInterval = 0;
+    long countSub = 1;
     volatile boolean unSubTag = false;
     public void subscribe(String interval){
         if (currentSubscribe != null && !currentSubscribe.equals(interval)){
+            unSubTag = true;
             //取消订阅
             send("unsub", currentSubscribe);
-            unSubTag = true;
         }
         currentSubscribe = interval;
         switch (interval){
             case "1D":
                 timeInterval = 24 * 60 * 60 * 1000;
+                countSub = 100000000;
                 break;
             case "1W":
                 timeInterval = 7 * 24 * 60 * 60 * 1000;
+                countSub = 2000000000;
                 break;
             case "1M":
                 timeInterval = 8 * 24 * 60 * 60 * 1000;
+                countSub = 100000000;
                 break;
             case "-1":
                 timeInterval = 1 * 1000;
+                countSub = 100000;
                 break;
             default:
                 timeInterval = Integer.parseInt(interval) * 60 * 1000;
+                countSub =  Integer.parseInt(interval) * 100000;
                 break;
         }
         startSubscribe();
@@ -150,7 +156,7 @@ public class WebSocketService {
                         kLineEntity.Open = Float.parseFloat(object.getString("open"));
                         kLineEntity.Time = object.getLong("seq") * 1000L;
                         kLineEntity.Date = new SimpleDateFormat("MM-dd HH:mm").format(new Date(kLineEntity.Time));
-                        kLineEntity.Volume = Float.parseFloat(object.getString("count"))/1000000;
+                        kLineEntity.Volume = Float.parseFloat(object.getString("count"))/countSub;
 
                         if (unSubTag){ //取消订阅后会有一段多余的数据留存，跳过他们
                             startSubscribe();
@@ -162,7 +168,7 @@ public class WebSocketService {
                                 notifySubscribe(true, kLineEntity);
                             }
                         }
-                        //Log.e("JWebSClientService",  timeInterval + "-->>  "+kLineEntity.Date + "--"+ (kLineEntity.Time - currentTime));
+                        //Log.e("JWebSClientService",  timeInterval + "-->>  "+kLineEntity.Date + ">>"+ kLineEntity.Volume);
                     } else if (type.equals("one")) {
                         //第一次加载所有数据
                         List<KLineEntity> data = new ArrayList<>();
@@ -179,7 +185,7 @@ public class WebSocketService {
                             kLineEntity.Date = new SimpleDateFormat("MM-dd HH:mm").format(new Date(kLineEntity.Time));
                             kLineEntity.Volume = Float.parseFloat(object.getString("count"));
                             if (kLineEntity.Volume != 0){
-                                //Log.e("JWebSClientService", "append>>"+ kLineEntity.Date + "-->>"+kLineEntity.Time);
+                                //Log.e("JWebSClientService", "append>>"+ kLineEntity.Date + "-->>"+kLineEntity.Volume);
                                 data.add(kLineEntity);
                             }else{
                                 //Log.e("JWebSClientService", kLineEntity.Date + "-->>"+ kLineEntity.Time);
@@ -191,7 +197,7 @@ public class WebSocketService {
                     }
                 } else {
                     //更新最新数据
-                    //Log.e("JWebSClientService", jsonObject.toString());
+                    Log.e("JWebSClientService", jsonObject.toString());
                     JSONArray areaArray = jsonObject.getJSONArray("area");
                     for (int i = 0; i < areaArray.length(); i++) {
                         JSONObject itemObject = areaArray.getJSONObject(i);
@@ -207,6 +213,8 @@ public class WebSocketService {
                                     beanPrice.openPrice = dataItemObject.getString("openPrice");
                                     beanPrice.usdttormb = dataItemObject.getDouble("usdttormb");
                                     beanPrice.transactionSum = dataItemObject.getString("transactionSum");
+                                    beanPrice.coinSymbol = dataItemObject.getString("coinSymbol");
+                                    beanPrice.currencyToRmb = dataItemObject.getString("currencyToRmb");
                                     notifyCurrentPrice(beanPrice);
                                     break;
                                 }

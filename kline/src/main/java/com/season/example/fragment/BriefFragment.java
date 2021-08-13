@@ -29,15 +29,15 @@ import java.util.Date;
 
 public class BriefFragment extends Fragment {
 
-    TextView text_one;
-    TextView text_two;
-    TextView text_three;
-    TextView text_for;
-    TextView text_see;
-    TextView text_sve;
-    TextView text_fiv;
-    TextView text_night;
-    TextView text_nie;
+    TextView titleView;
+    TextView timeView;
+    TextView amountView;
+    TextView totalView;
+    TextView priceView;
+    TextView bookView;
+    TextView webView;
+    TextView blockView;
+    TextView introView;
 
     public String coinCode = "";
     public String langCode = "";
@@ -60,21 +60,21 @@ public class BriefFragment extends Fragment {
                 String res = SimpleRequest.getRequest(briefUrl + "?symbol=" + coinCode + "&langCode=" + langCode);
                 JSONObject jsonObject = new JSONObject(res).getJSONObject("exProduct");
                 if (jsonObject.has("coinCode") && jsonObject.has("name"))
-                    text_one.setText(jsonObject.getString("name") + "(" + jsonObject.getString("coinCode") + ")");
+                    titleView.setText(jsonObject.getString("name") + "(" + jsonObject.getString("coinCode") + ")");
                 if (jsonObject.has("issueTime"))
-                    text_two.setText(new SimpleDateFormat("yyyy-MM-dd HH:mm").format(new Date(jsonObject.getLong("issueTime"))));
+                    timeView.setText(new SimpleDateFormat("yyyy-MM-dd HH:mm").format(new Date(jsonObject.getLong("issueTime"))));
                 DecimalFormat dfRMB = new DecimalFormat("#,###");
                 if (jsonObject.has("totalNum"))
-                    text_three.setText(dfRMB.format(new BigDecimal(jsonObject.getString("totalNum"))));
+                    amountView.setText(dfRMB.format(new BigDecimal(jsonObject.getString("totalNum"))));
 
                 if (jsonObject.has("stock"))
-                    text_for.setText(dfRMB.format(new BigDecimal(jsonObject.getString("stock"))));
+                    totalView.setText(dfRMB.format(new BigDecimal(jsonObject.getString("stock"))));
 
-                text_see.setText(jsonObject.has("crowdfundingPrice") ? jsonObject.getString("crowdfundingPrice") : "");
-                text_sve.setText(jsonObject.has("writeBook") ? jsonObject.getString("writeBook") : "");
-                text_fiv.setText(jsonObject.has("officialWebsite") ? jsonObject.getString("officialWebsite") : "");
-                text_night.setText(jsonObject.has("blockBrowser") ? jsonObject.getString("blockBrowser") : "");
-                text_nie.setText(jsonObject.has("productReferral") ? jsonObject.getString("productReferral") : "");
+                priceView.setText(jsonObject.has("crowdfundingPrice") ? jsonObject.getString("crowdfundingPrice") : "");
+                bookView.setText(jsonObject.has("writeBook") ? jsonObject.getString("writeBook") : "");
+                webView.setText(jsonObject.has("officialWebsite") ? jsonObject.getString("officialWebsite") : "");
+                blockView.setText(jsonObject.has("blockBrowser") ? jsonObject.getString("blockBrowser") : "");
+                introView.setText(jsonObject.has("productReferral") ? jsonObject.getString("productReferral") : "");
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -85,34 +85,34 @@ public class BriefFragment extends Fragment {
 
 
     private void initView(View parentView) {
-        text_one = parentView.findViewById(R.id.text_one);
-        text_two = parentView.findViewById(R.id.text_two);
-        text_three = parentView.findViewById(R.id.text_three);
-        text_for = parentView.findViewById(R.id.text_for);
-        text_see = parentView.findViewById(R.id.text_see);
-        text_sve = parentView.findViewById(R.id.text_sve);
-        text_fiv = parentView.findViewById(R.id.text_fiv);
-        text_night = parentView.findViewById(R.id.text_night);
-        text_nie = parentView.findViewById(R.id.text_nie);
+        titleView = parentView.findViewById(R.id.brief_tv_title);
+        timeView = parentView.findViewById(R.id.brief_tv_time);
+        amountView = parentView.findViewById(R.id.brief_tv_amount);
+        totalView = parentView.findViewById(R.id.brief_tv_total);
+        priceView = parentView.findViewById(R.id.brief_tv_price);
+        bookView = parentView.findViewById(R.id.brief_tv_book);
+        webView = parentView.findViewById(R.id.brief_tv_web);
+        blockView = parentView.findViewById(R.id.brief_tv_block);
+        introView = parentView.findViewById(R.id.brief_tv_intro);
 
-        text_sve.setOnClickListener(v -> {
-            openBrowser(text_sve.getText().toString());
+        bookView.setOnClickListener(v -> {
+            openBrowser(bookView.getText().toString());
         });
-        text_night.setOnClickListener(v -> {
-            openBrowser(text_night.getText().toString());
+        blockView.setOnClickListener(v -> {
+            openBrowser(blockView.getText().toString());
         });
-        text_fiv.setOnClickListener(v -> {
-            openBrowser(text_fiv.getText().toString());
+        webView.setOnClickListener(v -> {
+            openBrowser(webView.getText().toString());
         });
 
         parentView.findViewById(R.id.text_sve_copy).setOnClickListener(v -> {
-            copy(text_sve.getText().toString());
+            copy(bookView.getText().toString());
         });
         parentView.findViewById(R.id.text_night_copy).setOnClickListener(v -> {
-            copy(text_night.getText().toString());
+            copy(blockView.getText().toString());
         });
         parentView.findViewById(R.id.text_fiv_copy).setOnClickListener(v -> {
-            copy(text_fiv.getText().toString());
+            copy(webView.getText().toString());
         });
     }
 
@@ -131,6 +131,6 @@ public class BriefFragment extends Fragment {
         ClipboardManager clipboard = (ClipboardManager) getContext().getSystemService(Context.CLIPBOARD_SERVICE);
         ClipData clipData = ClipData.newPlainText(null, data);
         clipboard.setPrimaryClip(clipData);
-        Toast.makeText(getContext(), "copy successfully", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), "copied", Toast.LENGTH_SHORT).show();
     }
 }

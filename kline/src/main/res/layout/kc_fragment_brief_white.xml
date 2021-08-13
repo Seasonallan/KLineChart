@@ -11,7 +11,7 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/text_one"
+            android:id="@+id/brief_tv_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginVertical="20dp"
@@ -33,7 +33,7 @@
                 android:textSize="13sp" />
 
             <TextView
-                android:id="@+id/text_two"
+                android:id="@+id/brief_tv_time"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -57,7 +57,7 @@
                 android:textSize="13sp" />
 
             <TextView
-                android:id="@+id/text_three"
+                android:id="@+id/brief_tv_amount"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -81,7 +81,7 @@
                 android:textSize="13sp" />
 
             <TextView
-                android:id="@+id/text_for"
+                android:id="@+id/brief_tv_total"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -105,7 +105,7 @@
                 android:textSize="13sp" />
 
             <TextView
-                android:id="@+id/text_see"
+                android:id="@+id/brief_tv_price"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -129,7 +129,7 @@
                 android:textSize="13sp" />
 
             <TextView
-                android:id="@+id/text_sve"
+                android:id="@+id/brief_tv_book"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -164,7 +164,7 @@
                 android:textSize="13sp" />
 
             <TextView
-                android:id="@+id/text_fiv"
+                android:id="@+id/brief_tv_web"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -198,7 +198,7 @@
                 android:textSize="13sp" />
 
             <TextView
-                android:id="@+id/text_night"
+                android:id="@+id/brief_tv_block"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -234,7 +234,7 @@
                 android:textSize="21sp" />
 
             <TextView
-                android:id="@+id/text_nie"
+                android:id="@+id/brief_tv_intro"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:lineSpacingExtra="8dp"
